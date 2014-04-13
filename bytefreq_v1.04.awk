@@ -18,13 +18,14 @@
 #----------------------------------------------------------------#
 #
 # ByteFreq_1.0.4 Data Profiling Software
+# Copyright ByteSumo Limited, 2014. All rights reserved.
 #
 #
 # Instructions for use
 #
 # on the commandline, you call the profiler as a gawk script: 
 #
-# gawk -F"\t" -f bytefreq_v1.02.awk -v header="1" -v report="1" -v grain="H" yourfile.tab
+# gawk -F"\t" -f bytefreq_v1.04.awk -v header="1" -v report="1" -v grain="H" testdata.tab
 #
 #
 # The options on the command line are: 
@@ -84,19 +85,26 @@ NR == header {
 # that needs doing through adding it to a large number so the non-numeric sortation is correct in awk
 
   hout = ""
-  gsub(/ /,"",$0)
-  gsub(/_/,"",$0)
-  gsub(/\t/,"",$0)
-  gsub(/|/,"",$0)
+
 
   for (field = 1; field <= NF ; field++) {
+
+     clean_colname = $(field)
+
+	  gsub(/ /,"",clean_colname)
+	  gsub(/_/,"",clean_colname)
+	  gsub(/\t/,"",clean_colname)
+	  # gsub(/|/,"",clean_colname)
 
   	 if (field >1) {hout = hout FS}	
 
 	 if (report == 2){
-		hout = hout clean FS "DQ_" $(field) 
+		hout = hout clean_colname FS "DQ_"clean_colname 
 	 } else {
-		names[field]="##column_"(100000000+field)"_"$(field)	
+
+	    zcoln = "col_"(100000+field)
+	    gsub(/^col_1/,"col_",zcoln)
+		names[field]=zcoln"_"clean_colname	
 	 }
 
   } # this is the end of the field loop 
@@ -223,6 +231,32 @@ END {
 
 		if ( report == 1 ){
 		print("\n\n")
+
+		print "		----------------------------------------------------------------           "	
+		print "																			 	    "
+		print "		                															"
+
+		print "		             															    "
+		print "		              |       |     												"
+		print "		              |--\\  /-|-.-.             .									"
+		print "		              |__/\\/  | \\/_            . :.								    "
+		print "		               ___/__  __ __  __   ___/ . .							        "
+		print "		              / ._|| | | || \\/  \\ / _ \\ . : .: 							    "
+		print "		              \\_  \\| |_| || | | || [_] | .. 								"
+		print "		              \\___/|____/||_|_|_| \\___/ ..									"
+		print "		                                  / . ..  .:								"
+		print "		                                   .: .  .:  								"
+		print "		                															"
+		print "		                															"
+		print "		                															"
+		print "																					"
+		print "		 Data Strategy | Data Architecture | Data Science & Engineering 			"
+		print "		----------------------------------------------------------------			"
+		print ""
+		print ""
+		print("Data Profiling Report: "strftime("[%Y-%m-%d %H:%M:%S]"))
+		print ""
+
 		}
 		prev_finalcolname ="X"
 
@@ -253,11 +287,11 @@ END {
 					gsub(/./," ",fcol)
 					gsub(/^....../,"column",fcol)
 	
-					print("\n"fhead"\t"fcol"\t\tcount\tpattern")
+					print("\n"fhead"\t"fcol"\t\tcount\tpattern\t\texample")
 
 					gsub(/./,"=",fhead)
 				 	gsub(/./,"=",fcol)
-					print(fhead"\t"fcol"\t\t=====\t=======")
+					print(fhead"\t"fcol"\t\t=====\t=======\t\t=======")
 
 					print(linefield[1]"\t"finalcolname"\t\t"linefield[4]"\t"linefield[5])		
 					prev_finalcolname=finalcolname	
@@ -274,8 +308,8 @@ END {
 
   } # end of the report !=2 to check we print analysis  
 
-print("\n Copyright Andrew Morgan, 2010.")
-print(" EVALUATION COPY of the ByteFreq Data Profiler. No Production Use Permitted.")
+ print("\nByteFreq Data Profiler. Copyright ByteSumo Limited, 2014.")
+# print(" ByteFreq Data Profiler. No Production Use Permitted.")
 
 } # end of END
 
