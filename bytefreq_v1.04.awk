@@ -227,7 +227,7 @@ END {
 # print output
 
 		# This section prints the output, either a report or a datafile as specified on the command line.
-		# A license notice is printed on all output as this is an evaluation copy.
+		#
 
 		if ( report == 1 ){
 		print("\n\n")
@@ -253,6 +253,7 @@ END {
 		print "		 Data Strategy | Data Architecture | Data Science & Engineering 			"
 		print "		----------------------------------------------------------------			"
 		print ""
+		print "ByteFreq is the property of ByteSumo Ltd. All rights reserved."
 		print ""
 		print("Data Profiling Report: "strftime("[%Y-%m-%d %H:%M:%S]"))
 		print ""
