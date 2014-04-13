@@ -1,6 +1,5 @@
 
 
-
              
               |       |     
               |--\  /-|-.-.             .
@@ -21,14 +20,20 @@ Author: Andrew J Morgan
 
 
 Introduction
-The ByteFreq Data Profiler is a tool that allows you to gain insight into the quality of your data through profiling the data formats of each field in your files.  It is an enabling tool, which provides the primary research needed to drive automated data quality engines downstream.
+The ByteFreq Data Profiler is a tool that allows you to gain insight into the quality of your data through profiling the data
+formats of each field in your files.  It is an enabling tool, which provides the primary research needed to drive automated 
+data quality engines downstream.
 
 
 What it does
-The profiler reads in your file based data, and column by column converts the data item level contents into a generalised pattern-string that helps to characterise the format of the data held in each column. It then can output this as raw data, or it can track the frequency of each pattern found per column in an associative array to generate frequency counts that summarise the content of your data file, field by field. 
+The profiler reads in your file based data, and column by column converts the data item level contents into a generalised 
+pattern-string that helps to characterise the format of the data held in each column. It then can output this as raw data, 
+or it can track the frequency of each pattern found per column in an associative array to generate frequency counts that 
+summarise the content of your data file, field by field. 
 
 
-The software enables three outputs necessary to construct an automated data quality engine: human readable reports, metrics in a form that can be processed automatically, and a raw mapping between input data points and the profile strings calculated. 
+The software enables three outputs necessary to construct an automated data quality engine: human readable reports, metrics 
+in a form that can be processed automatically, and a raw mapping between input data points and the profile strings calculated. 
 
 
 Example Output of a Human Readable Report:
@@ -50,7 +55,10 @@ out.tab col_00002_email              93          aaaaaaaaaaa99999@aaaaaaa.aaa
 out.tab col_00002_email              92          Aaaa.Aaa@aaaaaaaaaaaaaa.aaa
 
 
-To interpret the output, an understanding of how the program generalises data into the pattern-string is useful. Below is a description of the two available algorithms you can select from when studying your data, the first resulting in a granular study of your data, and the second a more generalised study of your data. Note the default setting is to produce more granular output.
+To interpret the output, an understanding of how the program generalises data into the pattern-string is useful. 
+Below is a description of the two available algorithms you can select from when studying your data, the first resulting
+in a granular study of your data, and the second a more generalised study of your data. Note the default setting is
+to produce more granular output.
 
 
 Highly Granular Pattern Construction:
@@ -94,30 +102,42 @@ Notice that the profile is more general using this rule, so the profiles match m
 
 Technology
 
-The profiler is written in AWK, and the intended program to run it is GAWK. There is a very specific reason for this. AWK is a core part of the unix kernal, and as such, is both robust and ubiquitous in all types of computing environments. This means the profiler can be introduced to highly locked down production systems with no new software installation per se needed to run the scripts, and with minimal introduction of risk to the existing services hosted. 
+The profiler is written in AWK, and the intended program to run it is GAWK. There is a very specific reason for this. 
+AWK is a core part of the unix kernal, and as such, is both robust and ubiquitous in all types of computing environments. 
+This means the profiler can be introduced to highly locked down production systems with no new software installation per se 
+needed to run the scripts, and with minimal introduction of risk to the existing services hosted. 
 
-In addition to code being able to run on any unix system, it can also be run on windows systems via 'nix emulators such as MKS (a 64-bit closed-source unix emulator for windows) or cygwin (a 32-bit open-source unix emulator for windows), both common in enterprise production environments.
+In addition to code being able to run on any unix system, it can also be run on windows systems via 'nix emulators such 
+as MKS (a 64-bit closed-source unix emulator for windows) or cygwin (a 32-bit open-source unix emulator for windows), both 
+common in enterprise production environments.
 
 If you wish to run this code in a JAVA environment, it is perhaps possible via the JAWK library. 
 
 
 Input and Output Configuration options
 
-The code has only a few simple configuration options carefully chosen to meet the needs of many. The three main output choices configurable are:
+The code has only a few simple configuration options carefully chosen to meet the needs of many. The three main output choices 
+configurable are:
 
 -v report ="0" -- (0) produce profile metrics data, directly loadable to a database or data quality rules engine
 -v report ="1" -- (1) produce profile metrics text reports, in a format easily printed 
--v report ="2" -- (2) produce a modified copy of your input data, having additional columns containing the calculated profile strings that can be loaded directly to a database or fed into a data quality rules engine.
+-v report ="2" -- (2) produce a modified copy of your input data, having additional columns containing the calculated profile 
+strings that can be loaded directly to a database or fed into a data quality rules engine.
 
 Option Notes:
 
-For option (0), the profiler will generate a metrics file having 4 column tab delimited file having the following delimited file layout:
+For option (0), the profiler will generate a metrics file having 4 column tab delimited file having the following delimited 
+file layout:
+
 <filename><column_identifier><count><pattern>
+
 where the column names specified in the header are prefixed with .col_<column_id>_. 
 
-For option (1) the report output includes these same fields but formatted into a more readable layout as seen in the example given in the .What it does. section.
-
-For option (2), the file will output the original data alongside new columns holding the calculated profiles. This is a critical output, as when a profile is found that needs investigation, this output can be used to find the matching raw data records of interest. The simplest was to do this is using filters in excel, but more sophisticated options are also available.
+For option (1) the report output includes these same fields but formatted into a more readable layout as seen in the example
+given in the .What it does. section.
+For option (2), the file will output the original data alongside new columns holding the calculated profiles. This is a critical 
+output, as when a profile is found that needs investigation, this output can be used to find the matching raw data records of 
+interest. The simplest was to do this is using filters in excel, but more sophisticated options are also available.
 
 
 Command Line Options
@@ -129,14 +149,20 @@ awk -F"\t" -f bytefreq_v1.04.awk -v header="1" -v report="1" -v grain="L" input.
 Usage:
 
 -F"\t"        Use the native -F option in AWK to set your input data file delimiter, also known as it's Field Separator, FS. 
-The example above shows the setting for a tab delimited file, but there are many advanced field and record separator choices available if you read the AWK documentation.  
+
+The example above shows the setting for a tab delimited file, but there are many advanced field and record separator 
+choices available if you read the AWK documentation.  
 
 
--f bytefreq_v1.01.awk        The -f option tells awk to run the profiler code. Be sure to include a fully qualified file path to the code if your working directory is not where the code is sitting. 
+-f bytefreq_v1.01.awk        The -f option tells awk to run the profiler code. Be sure to include a fully qualified file path 
+                             to the code if your working directory is not where the code is sitting. 
 
 
--v header="1"        The command line option to set the row to use to pick up the headers in the file. If you set this value to row 1, it will use the first row as the header row. If you set it to X, the code will use the Xth row to pick up headers and ignore all proceeding lines in the file, a feature that can occasionally be very handy. The default value if this setting if it is not explicitly set ion the command line s .0., meaning, no header record.
- 
+-v header="1"        The command line option to set the row to use to pick up the headers in the file. 
+                     If you set this value to row 1, it will use the first row as the header row. If you set it to X, the code 
+                     will use the Xth row to pick up headers and ignore all proceeding lines in the file, a feature that can 
+                     occasionally be very handy. The default value if this setting if it is not explicitly set on the command 
+                     line is "0", meaning, no header record.
 -v report="0"        Sets the output to a machine readable profile frequency dataset.
 -v report="1"        Sets the output to a human readable profile frequency report.
 -v report="2"        Sets the output to raw + profiled full volume data in a machine readable format.
@@ -144,9 +170,12 @@ The example above shows the setting for a tab delimited file, but there are many
 -v grain="H"         Set the Highly granular level of pattern formats in the output
 
 
-input.data          The file you wish to examine. Note if the working directory doesn't hold the file, you need to set this value to being the fully qualified path and file name.
+input.data          The file you wish to examine. Note if the working directory doesn't hold the file, you need to set this 
+                    value to being the fully qualified path and file name.
 
 
-> output.report.txt        This is the standard unix notation meaning .redirect the output to a file., which if not set means the profiler will output it.s metrics to STDOUT (standard out) be sure to use a fully qualified name if you wish the output to be written to a different folder.
+> output.report.txt        This is the standard unix notation meaning 'redirect the output to a file', which if not set 
+                           means the profiler will output it's metrics to STDOUT (standard out) be sure to use a fully qualified
+                           name if you wish the output to be written to a different folder.
 
 
