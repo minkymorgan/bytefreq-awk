@@ -253,7 +253,7 @@ END {
 		print "		 Data Strategy | Data Architecture | Data Science & Engineering 			"
 		print "		----------------------------------------------------------------			"
 		print ""
-		print "ByteFreq is the property of ByteSumo Ltd. All rights reserved."
+		#print "ByteFreq is the property of ByteSumo Ltd. All rights reserved."
 		print ""
 		print("Data Profiling Report: "strftime("[%Y-%m-%d %H:%M:%S]"))
 		print ""
@@ -309,7 +309,7 @@ END {
 
   } # end of the report !=2 to check we print analysis  
 
- print("\nByteFreq Data Profiler. Copyright ByteSumo Limited, 2014.")
+ print("\nByteFreq Data Profiler. Copyright ByteSumo Limited, 2014. All rights reserved.")
 # print(" ByteFreq Data Profiler. No Production Use Permitted.")
 
 } # end of END
