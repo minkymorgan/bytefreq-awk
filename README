@@ -179,3 +179,33 @@ input.data          The file you wish to examine. Note if the working directory 
                            name if you wish the output to be written to a different folder.
 
 
+NOTES ON PARALLEL RUNNING
+
+Should you wish, you can run this program using parallel, 
+using a handy tool found at http://www.gnu.org/software/parallel
+
+An example of the syntax is:
+
+     # create a second test file
+     cat testdata.tab > testdata2.tab
+
+     # pass a file glob to parallel, and run the profiler over the files in parallel. Fold output into single report. 
+     ls *.tab | parallel -q gawk -F"\t" -f bytefreq_v1.04.awk -v report="0" -v header="1" -v grain="H" ::: | gawk -F"\t" 'NF==6 {print $0}' > output.rpt
+
+Parallel should be cited if used in acedemic work.
+
+@article{Tange2011a,
+    title = {GNU Parallel - The Command-Line Power Tool},
+    author = {O. Tange},
+    address = {Frederiksberg, Denmark},
+    journal = {;login: The USENIX Magazine},
+    month = {Feb},
+    number = {1},
+    volume = {36},
+    url = {http://www.gnu.org/s/parallel},
+    year = {2011},
+    pages = {42-47},
+    doi = {10.5281/zenodo.16303}
+  }
+
+
