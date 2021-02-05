@@ -19,6 +19,10 @@ All rights reserved.
 Author: Andrew J Morgan
 
 
+bytefreq_v1.04.awk
+/* note this readme needs updating for v1.05 */
+
+
 Introduction
 The ByteFreq Data Profiler is a tool that allows you to gain insight into the quality of your data through profiling the data
 formats of each field in your files.  It is an enabling tool, which provides the primary research needed to drive automated 
@@ -161,7 +165,7 @@ choices available if you read the AWK documentation.
 -v header="1"        The command line option to set the row to use to pick up the headers in the file. 
                      If you set this value to row 1, it will use the first row as the header row. If you set it to X, the code 
                      will use the Xth row to pick up headers and ignore all proceeding lines in the file, a feature that can 
-                     occasionally be very handy. The default value if this setting if it is not explicitly set on the command 
+                     occasionally be very handy. The default value of this setting, if not explicitly set on the command 
                      line is "0", meaning, no header record.
 -v report="0"        Sets the output to a machine readable profile frequency dataset.
 -v report="1"        Sets the output to a human readable profile frequency report.
