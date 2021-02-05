@@ -13,22 +13,22 @@
 ## Prepare and reset the test suite
 echo "## Reset test files and directories"
 
-#rm testdata/*.zip
-#rm testdata/*.csv
-#rm testdata/*.pip
+rm testdata/*.zip
+rm testdata/*.csv
+rm testdata/*.pip
 
 ## Download the companies house data which is provided in csv + enclosures format, like excel produces. (CSV is ALWAYS a terrible mistake - pls avoid). 
-#echo "## Fetching the companies house data using wget"
+echo "## Fetching the companies house data using wget"
 
 #wget http://download.companieshouse.gov.uk/BasicCompanyData-part6.zip
-#mv BasicCompanyData-part6.zip testdata/.
+mv BasicCompanyData-part6.zip testdata/.
 
  
 ## Unzip the data. 
-#echo "## unzipping the data"
-#cd testdata
-#unzip BasicCompanyData-part6.zip
-#cd ..
+echo "## unzipping the data"
+cd testdata
+unzip BasicCompanyData-part6.zip
+cd ..
 
 ## User charfreq to find out what is in the file. Is it all extended ascii? Maybe not!
 
