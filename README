@@ -8,23 +8,14 @@ License: GPLv3
 bytefreq_v1.05.awk
 
 Introduction
-The ByteFreq Data Profiler is a tool that allows you to gain insight into the quality of your data through profiling the data
-formats of each field in your files.  It is an enabling tool, which provides the primary research needed to drive automated 
-data quality engines downstream. This technique is called Mask-Based Data Profiling. It is described in detail in the following
-book: Mastering Spark for Data Science (https://www.packtpub.com/product/mastering-spark-for-data-science/9781785882142)
-
+The ByteFreq Data Profiler is a tool that allows you to gain insight into the quality of your data through profiling the data formats of each field in your files.  It is an enabling tool, which provides the primary research needed to drive automated data quality engines downstream. This technique is called Mask-Based Data Profiling. It is described in detail in the following book: Mastering Spark for Data Science (https://www.packtpub.com/product/mastering-spark-for-data-science/9781785882142)
 
 What it does
 It finds bad data fast - using mask based data profiling. How?
-The profiler reads in your file based data, and column by column and converts the data item level contents into a generalised 
-pattern-string feature that helps to characterise the format of the data held in each column. It then can output this as raw data, 
-and it can track the frequency of each pattern found per column in an associative array to generate frequency counts that 
-summarise the content of your data file, field by field. 
+The profiler reads in your file based data, and column by column and converts the data item level contents into a generalised pattern-string feature that helps to characterise the format of the data held in each column. It then can output this as raw data, and it can track the frequency of each pattern found per column in an associative array to generate frequency counts that  summarise the content of your data file, field by field. 
 
 
-The software enables several outputs, each necessary for a different part of the data quality process. They can be used to construct 
-an automated data quality engine: human readable reports, metrics in a form that can be processed automatically, and a raw mapping 
-between input data points and the profile strings calculated. 
+The software enables several outputs, each necessary for a different part of the data quality process. They can be used to construct an automated data quality engine: human readable reports, metrics in a form that can be processed automatically, and a raw mapping between input data points and the profile strings calculated. 
 
 
 
