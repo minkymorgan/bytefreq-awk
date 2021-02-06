@@ -13,17 +13,22 @@
 ## Prepare and reset the test suite
 echo "## Reset test files and directories"
 
-rm testdata/*.zip
 rm testdata/*.csv
 rm testdata/*.pip
+rm out/*
 
 ## Download the companies house data which is provided in csv + enclosures format, like excel produces. (CSV is ALWAYS a terrible mistake - pls avoid). 
-echo "## Fetching the companies house data using wget"
 
-#wget http://download.companieshouse.gov.uk/BasicCompanyData-part6.zip
-mv BasicCompanyData-part6.zip testdata/.
+echo "checking if you have the test data from companies house, if not we'll download it"
 
- 
+# if the file doesn't exist, if it doesn't go get it
+if [ ! -f "testdata/BasicCompanyData-part6.zip" ]
+then
+   echo "## Fetching the companies house data using wget"
+   wget http://download.companieshouse.gov.uk/BasicCompanyData-part6.zip
+   mv BasicCompanyData-part6.zip testdata/.
+fi
+
 ## Unzip the data. 
 echo "## unzipping the data"
 cd testdata
@@ -100,19 +105,19 @@ python3 parsers/csv2pipe.py testdata/BasicCompanyData-2021-02-01-part6_6.csv
 # Do it by reading in the file and generating the profiling data.
 
 
-#     #GENERATE HUMAN READABLE REPORT - popular eyeball inspection report
-gawk -F"\t" -f bytefreq_v1.05.awk -v header="1" -v report="1" -v grain="L" testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip >out/UkCompanySample.rpt1.txt
+echo  "GENERATE HUMAN READABLE REPORT - popular eyeball inspection report"
+time gawk -F"|" -f bytefreq_v1.05.awk -v header="1" -v report="1" -v grain="L" testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip >out/UkCompanySample.rpt1.txt
 
-#     #GENERATE DATABASE LOADABLE REPORT SUMMARY OUTPUTS - for automation, used for drift in quality analysis
-gawk -F"|" -f bytefreq_v1.05.awk -v header="1" -v report="0" -v grain="L" testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip > out/UkCompanySample.rpt0.txt
+echo  "GENERATE DATABASE LOADABLE REPORT SUMMARY OUTPUTS - for automation, used for drift in quality analysis"
+time gawk -F"|" -f bytefreq_v1.05.awk -v header="1" -v report="0" -v grain="L" testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip > out/UkCompanySample.rpt0.txt
 
-#     #GENERATE DATABASE LOADABLE RAW+PROFILED DATA - for manual cleansing, find bad datapoints and fix them
-gawk -F"|" -f bytefreq_v1.05.awk -v header="1" -v report="2" -v grain="L" testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip > out/UkCompanySample.raw2.txt
+echo  "#GENERATE DATABASE LOADABLE RAW+PROFILED DATA - for manual cleansing, find bad datapoints and fix them"
+time gawk -F"|" -f bytefreq_v1.05.awk -v header="1" -v report="2" -v grain="L" testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip > out/UkCompanySample.raw2.txt
 
-#     #GENERATE DATABASE LOADABLE LONGFORMAT RAW DATA - for automated remediation
-gawk -F"|" -f bytefreq_v1.05.awk -v header="1" -v report="3" -v grain="L" testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip > out/UkCompanySample.raw3.txt
+echo  "GENERATE DATABASE LOADABLE LONGFORMAT RAW DATA - for automated remediation"
+time gawk -F"|" -f bytefreq_v1.05.awk -v header="1" -v report="3" -v grain="L" testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip > out/UkCompanySample.raw3.txt
 
-# SUCCESS !
+echo "SUCCESS !"
 # Now you have all the things you need to eyeball the quality, study drift over time, find and propose fixes, to automate correcting bad data points
 # all that is left to do, is to use your new understanding to construct automated data quality tools that sit inline the data pipelines
 
