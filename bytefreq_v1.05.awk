@@ -61,6 +61,20 @@
 ################################################################################################################# 
 
 
+#  included as only GAWK has asort - you can define your own array sorting function here, or comment this out if you wish for gawk:
+#  
+   function azsort(a,n,local,i,j,t) {
+        # Sort n elements of array a, from John Bently
+        # a must be indexed numericaly with a base of 1.
+        # Use in place of GAWK 3.0.6+ array sorting.
+        for (i = 2; i <= n; i++) {
+            t = a[i]
+            for (j = i; j > 1 && a[j-1] > t; j--)
+                a[j] = a[j-1]
+            a[j] = t
+        }
+    }
+
 
 ################################################################################################################
 # inititalize code
@@ -259,13 +273,13 @@ END {
 
 ######################################################################################################
 # sort output
-		# sort the lineitmes now, which can be done using an alpha sort, because of my trick with 100000000000 
-	        # note that not all awk implementations support asort. gawk should do if the version is newish		
+# I have implemented a sort function in this script to make it portable to many awk implementations
 
-                if ( awk != "awk"){ 
-		     reportitems = asort(lineitems)
-                }
+reportitems = azsort(lineitems)
+
+
 #####################################################################################################
+
 # print output
 
 		# This section prints the output, either a report or a datafile as specified on the command line.
@@ -297,7 +311,7 @@ END {
 		print ""
 		#print "ByteFreq is the property of ByteSumo Ltd. All rights reserved."
 		print ""
-		print("Data Profiling Report: "strftime("[%Y-%m-%d %H:%M:%S]"))
+		print("Data Profiling Report: "today) 
 		print ""
 
 		}
