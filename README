@@ -8,35 +8,10 @@ License: GPLv3
 bytefreq_v1.05.awk
 
 Introduction
-The ByteFreq Data Profiler is a tool that allows you to gain insight into the quality of your data through profiling the data formats of each field in your files.  It is an enabling tool, which provides the primary research needed to drive automated data quality engines downstream. This technique is called Mask-Based Data Profiling. It is described in detail in the following book: Mastering Spark for Data Science (https://www.packtpub.com/product/mastering-spark-for-data-science/9781785882142)
+This is a data quality toolkit for data profiling, written in the portable awk language. 
+The library implements a number of data transformations and reports helping you do data quality studies using Mask-Based Data Profiling techniques.
 
-What it does
-It finds bad data fast - using mask based data profiling. How?
-The profiler reads in your file based data, and column by column and converts the data item level contents into a generalised pattern-string feature that helps to characterise the format of the data held in each column. It then can output this as raw data, and it can track the frequency of each pattern found per column in an associative array to generate frequency counts that  summarise the content of your data file, field by field. 
-
-
-The software enables several outputs, each necessary for a different part of the data quality process. They can be used to construct an automated data quality engine: human readable reports, metrics in a form that can be processed automatically, and a raw mapping between input data points and the profile strings calculated. 
-
-
-
-Example Output of a Human Readable Report:
-(generated using the option  -v report='1')
-
-
-file          column                 count 	 pattern
-======= ===============              ===== 	 =======
-out.tab col_00002_email              3300        aaaa_999_9.aaaaaaa@aaaaaaaaaaaaaa.aaa
-out.tab col_00002_email              1258        aaaaaa9aaaaa99999@aaaaaaa.aaa
-out.tab col_00002_email              810         aaaa_99_9.aaaaaaa@aaaaaaaaaaaaaa.aaa
-out.tab col_00002_email              720         aaaaa_99_9.aaaaaaa@aaaaaaaaaaaaaa.aaa
-out.tab col_00002_email              398         AAAA-AAAA-999@aaaaaaaaaaaaaa.aaa
-out.tab col_00002_email              382         aaaaaa9aaaaa9999@aaaaaaa.aaa
-out.tab col_00002_email              120         AA_AAA_AAA_99@aaaaaaaaaaaaaa.aaa
-out.tab col_00002_email              111         aaaaaaaaa.aa@aaaaaaaaaaaaa.aaa
-out.tab col_00002_email              108         aaaa.aa.aa9@aaaaaaaaaaaaaa.aaa
-out.tab col_00002_email              93          aaaaaaaaaaa99999@aaaaaaa.aaa
-out.tab col_00002_email              92          Aaaa.Aaa@aaaaaaaaaaaaaa.aaa
-
+The software enables several outputs, each necessary for a different part of the data quality process. They can be used for data quality inspections, or to preprocess your data to construct an automated data quality monitoring and cleansing engine in downstream tools. 
 
 To interpret the output, an understanding of how the program generalises data into the pattern-string is useful. 
 Below is a description of the two available algorithms you can select from when studying your data, the first resulting
@@ -81,29 +56,29 @@ which after transformation becomes:
         Aa Aa, 9 Aa Aa, Aa, Aa, AA, A9 9A
 
 Notice that the profile is more general using this rule, so the profiles match more occurances.  
+This greatly helps to summarise high cardinality data.
+
 
 
 Technology
 
-The profiler is written in AWK language, and there is a very specific reason for this. It is the domain specific 
-data processing language, which is stable and extremely useful.
+The profiler is written in awk language, and there is a very specific reason for this. It is a "domain specific language" having a POSIX definition, which is stable over time. Code I write today can be run without change for decades to come. The code is also extremely portable. 
  
-awk the tool, is a core part of the unix kernal, and as such, is both robust and ubiquitous in all types of computing environments. 
-This means the profiler can be introduced to highly locked down production systems with no new software installation per se 
-needed to run the scripts, and with minimal introduction of risk to the existing services hosted. 
+awk the tool, is a core part of the unix kernal, and as such, is both robust and ubiquitous in all types of computing environments. This means the profiler can be introduced to highly locked down production systems - and can be run without installing new software. This is very useful - allowing one to retrofit data quality monitoring into production ETL systems with minimal governance overhead, and minimal risk to the existing services hosted apart from processing load. 
 
-In addition to code being able to run on any unix system, it can also be run on windows systems via 'nix emulators such 
-as MKS (a 64-bit closed-source unix emulator for windows) or cygwin (a 32-bit open-source unix emulator for windows), both 
-common in enterprise production environments.
+In addition to code being able to run on any unix system, it can also be run on windows systems.
+There is a compiled 64-bit version of awk released here: https://github.com/p-j-miller/wmawk2
+Also - there are some linux emulators such as MKS (a 64-bit closed-source unix emulator for windows) or cygwin (a 32-bit open-source unix emulator for windows), both of which are common in enterprise production environments.
 
-This version has been tested with several implementations of the awk language:
+The later versions of the code have been tested with several implementations of the awk language:
 
 awk	- as available as standard in MacOS
 gawk	- the GNU version of AWK, available for every 'nix system you can imagine.
 goawk	- the implementation of AWK in the language go
 mawk	- a highly performance version of awk, optimised for speed
 
-see the docs folder for a comparative analysis (coming)
+There is a timer.log file in the repo - that has a comparison of the performance of these tools. mawk is the fastest. 
+At some point I will do a performance analysis. Also to do - try compiling a version with GRAALVM and testing that.
 
 Note - this code can also be converted to ansi-c and then compiled. This can be done with a variety of compilers. 
 GRAAVM is a potential compilation tool we should test.
