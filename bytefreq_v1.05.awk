@@ -64,63 +64,83 @@
 #  included as only GAWK has asort - you can define your own array sorting function here, or comment this out if you wish for gawk:
 #  
 
+#################
+# a homebrew asort function
+################                 https://github.com/snowflake/vole2/blob/212adbd710148691bd0d8bfdeb2b81a4be4b74a2/scripts/sortreleases.awk
+
+function versionnumbercompare( v1, v2){
+    split( v1, x1, /\./);
+    split( v2, x2, /\./);
+    # test major
+    f=1;
+    if( (0 + x1[f]) > (0 + x2[f])) return  1;
+    if( (0 + x1[f]) < (0 + x2[f])) return -1;
+    # major is the same, now test minor
+    f=2
+    if( (0 + x1[f]) > (0 + x2[f])) return  1;
+    if( (0 + x1[f]) < (0 + x2[f])) return -1;
+    # major and minor are the same, test patchlevel
+    f=3;
+    if( (0 + x1[f]) > (0 + x2[f])) return  1;
+    if( (0 + x1[f]) < (0 + x2[f])) return -1;
+    # versions are identical, return 0
+    return 0;
+}
+#################
+
+# See http://gotofritz.net/blog/geekery/a-selection-of-akw-scripts/
 #
-# qsort(a,l,r) sorts the array `a' with integer indices from `l' to `r'.
-#
-    function qsort(a,l,r ,i,j,x,y){
-	i=l; j=r;
-	x=a[int((l+r)/2)];
-	do
-	{
-		while(a[i]<x) i++;
-		while(x<a[j]) j--;
-		if(i<=j)
-		{
-			if(i!=j) { y=a[i]; a[i]=a[j]; a[j]=y; }
-			i++; j--;
-		}
-	}while(i<=j);
+# kickstarts the sort process
+# puts all the sorted keys into a separate array. if i
+function homebrew_asort(original, processed) {
+  # before we use the array we must be sure it is empty
+  empty_array(processed)
+  original_length = copy_and_count_array(original, processed)
+  qsort(original, processed, 0, original_length)
+  return original_length
+}
 
-	if(l<j) qsort(a,l,j);
-	if(i<r) qsort(a,i,r);
-   }
+# removes all values
+function empty_array(A) {
+  for (i in A)
+    delete A[i]
+}
 
-   function numsort(a,n,local,i,j,t) {
-        # Sort n elements of array a, from John Bently
-        # a must be indexed numericaly with a base of 1.
-        # Use in place of GAWK 3.0.6+ array sorting.
-        for (i = 2; i <= n; i++) {
-            t = a[i]
-            for (j = i; j > 1 && a[j-1] > t; j--)
-                a[j] = a[j-1]
-            a[j] = t
-        }
-    }
-
-
-  function less_than(left, right) {
-    return "" left <= "" right
+# awk doesn't even have an array size function... you also have to roll out your own
+function copy_and_count_array(original, processed) {
+  for (key in original) {
+      # awk doesn't seem to like array[0] -  so we start from 1
+      size++;
+      processed[size] = key
   }
-  function quicksort(data, left, right,   i, last)
-  {
-    if (left >= right)
-      return
+  return size
+}
 
-    quicksort_swap(data, left, int((left + right) / 2))
-    last = left
-    for (i = left + 1; i <= right; i++)
-      if (less_than(data[i], data[left]))
-        quicksort_swap(data, ++last, i)
-    quicksort_swap(data, left, last)
-    quicksort(data, left, last - 1)
-    quicksort(data, last + 1, right)
-  }
-  function quicksort_swap(data, i, j,   temp)
-  {
-    temp = data[i]
-    data[i] = data[j]
-    data[j] = temp
-  }
+# Adapted from a script from awk.info
+# http://awk.info/?quicksort
+function qsort(original, keys, left, right,   i, last) {
+  if (left >= right)  return
+  swap(keys, left, left + int( (right - left + 1) * rand() ) )
+  last = left
+  for (i = left+1; i <= right; i++)
+      if (versionnumbercompare(original[keys[i]], original[keys[left]]) == -1)
+      swap(keys, ++last, i)
+  swap(keys, left, last)
+  qsort(original, keys, left, last-1)
+  qsort(original, keys, last+1, right)
+}
+function swap(A, i, j,   t) {
+  t = A[i]; A[i] = A[j]; A[j] = t
+}
+
+# example usage for DESC order (Z-a) printing
+#    homebrew_asort(original, new);
+#    for( i in new) sizenew++;
+#    for(i = sizenew-1; i>0; i--){
+#        # Output in reverse order
+#        printf("%s\n", original[new[i]]);
+#    }
+
 
 
 
@@ -128,6 +148,11 @@
 # inititalize code
 
 BEGIN {
+
+##### sort #### add this in to support our homebrew_asort function
+current_index = 1
+
+
 # this section processes the command line options for headers, and output style
 if ( header == 1 ){
 	   header=1
@@ -201,7 +226,7 @@ NR == header {
   if (report == 2){
 	print hout
   } else if (report == 3) {
-        print "report_date" tabsep "filename" tabsep "colname" tabsep "grain" tabsep "profile" tabsep "rawval" 
+        print "report_date" tabsep "filename" tabsep "colname" tabsep "RowNum" tabsep "grain" tabsep "profile" tabsep "rawval" 
   }
 
 
@@ -260,7 +285,7 @@ NR > header {
 				temp_colname = "col_"temp_colname
  			}
                         # below we print out a line of data for each field in this row 
-			print today tabsep FILENAME tabsep temp_colname tabsep grain tabsep pattern tabsep $(field)
+			print today tabsep FILENAME tabsep NR tabsep temp_colname tabsep grain tabsep pattern tabsep $(field)
 
 		} else { 
         		allcolumns[field, pattern]++ 
@@ -324,10 +349,8 @@ END {
 # I have implemented a sort function in this script to make it portable to many awk implementations
 
 
-    for (i in lineitems) keys[n++]=i
-    reportitems = quicksort(keys, 0, n-1)
-
-
+    countof_reportitems = homebrew_asort(lineitems, reportitems)
+    
 #####################################################################################################
 
 # print output
@@ -367,10 +390,10 @@ END {
 		}
 		prev_finalcolname ="X"
 
-		for (line = 1; line <= reportitems; line++) {
+		for (line = 1; line <= countof_reportitems; line++) {
 
 			# now split the line to remove my internal sort key, that's the 100000000 - count thing.
-			split(lineitems[line], linefield, "|")
+			split(lineitems[reportitems[line]], linefield, "|")
 
 			# Don't forget to clean off the sort key from unheadered field names
                         finalcolname = linefield[2]
