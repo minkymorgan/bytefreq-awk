@@ -68,30 +68,12 @@
 # a homebrew asort function
 ################                 https://github.com/snowflake/vole2/blob/212adbd710148691bd0d8bfdeb2b81a4be4b74a2/scripts/sortreleases.awk
 
-function versionnumbercompare( v1, v2){
-    split( v1, x1, /\./);
-    split( v2, x2, /\./);
-    # test major
-    f=1;
-    if( (0 + x1[f]) > (0 + x2[f])) return  1;
-    if( (0 + x1[f]) < (0 + x2[f])) return -1;
-    # major is the same, now test minor
-    f=2
-    if( (0 + x1[f]) > (0 + x2[f])) return  1;
-    if( (0 + x1[f]) < (0 + x2[f])) return -1;
-    # major and minor are the same, test patchlevel
-    f=3;
-    if( (0 + x1[f]) > (0 + x2[f])) return  1;
-    if( (0 + x1[f]) < (0 + x2[f])) return -1;
-    # versions are identical, return 0
-    return 0;
-}
-#################
 
 # See http://gotofritz.net/blog/geekery/a-selection-of-akw-scripts/
 #
 # kickstarts the sort process
 # puts all the sorted keys into a separate array. if i
+
 function homebrew_asort(original, processed) {
   # before we use the array we must be sure it is empty
   empty_array(processed)
@@ -116,22 +98,44 @@ function copy_and_count_array(original, processed) {
   return size
 }
 
-# Adapted from a script from awk.info
-# http://awk.info/?quicksort
-function qsort(original, keys, left, right,   i, last) {
-  if (left >= right)  return
-  swap(keys, left, left + int( (right - left + 1) * rand() ) )
-  last = left
-  for (i = left+1; i <= right; i++)
-      if (versionnumbercompare(original[keys[i]], original[keys[left]]) == -1)
-      swap(keys, ++last, i)
-  swap(keys, left, last)
-  qsort(original, keys, left, last-1)
-  qsort(original, keys, last+1, right)
-}
-function swap(A, i, j,   t) {
-  t = A[i]; A[i] = A[j]; A[j] = t
-}
+
+ # quicksort.awk --- Quicksort algorithm, with user-supplied
+ #                   comparison function
+ #
+ # Arnold Robbins, arnold@skeeve.com, Public Domain
+ # January 2009
+ 
+ 
+ # quicksort --- C.A.R. Hoare's quicksort algorithm. See Wikipedia
+ #               or almost any algorithms or computer science text.
+ #
+ # Adapted from K&R-II, page 110
+ 
+ function qsort(data, left, right, less_than,    i, last)
+ {
+     if (left >= right)  # do nothing if array contains fewer
+         return          # than two elements
+ 
+     quicksort_swap(data, left, int((left + right) / 2))
+     last = left
+     for (i = left + 1; i <= right; i++)
+         if (@less_than(data[i], data[left]))
+             quicksort_swap(data, ++last, i)
+     quicksort_swap(data, left, last)
+     quicksort(data, left, last - 1, less_than)
+     quicksort(data, last + 1, right, less_than)
+ }
+ 
+ # quicksort_swap --- helper function for quicksort, should really be inline
+ 
+ function quicksort_swap(data, i, j,      temp)
+ {
+     temp = data[i]
+     data[i] = data[j]
+     data[j] = temp
+ }
+
+
 
 # example usage for DESC order (Z-a) printing
 #    homebrew_asort(original, new);
@@ -349,7 +353,19 @@ END {
 # I have implemented a sort function in this script to make it portable to many awk implementations
 
 
-    countof_reportitems = homebrew_asort(lineitems, reportitems)
+    homebrew_asort(lineitems, reportitems)
+
+    for( i in reportitems) countof_reportitems++
+
+
+# example usage for DESC order (Z-a) printing
+#    homebrew_asort(original, new);
+#    for( i in new) sizenew++;
+#    for(i = sizenew-1; i>0; i--){
+#        # Output in reverse order
+#        printf("%s\n", original[new[i]]);
+#    }
+
     
 #####################################################################################################
 
