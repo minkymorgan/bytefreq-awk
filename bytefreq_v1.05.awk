@@ -63,7 +63,29 @@
 
 #  included as only GAWK has asort - you can define your own array sorting function here, or comment this out if you wish for gawk:
 #  
-   function azsort(a,n,local,i,j,t) {
+
+#
+# qsort(a,l,r) sorts the array `a' with integer indices from `l' to `r'.
+#
+    function qsort(a,l,r ,i,j,x,y){
+	i=l; j=r;
+	x=a[int((l+r)/2)];
+	do
+	{
+		while(a[i]<x) i++;
+		while(x<a[j]) j--;
+		if(i<=j)
+		{
+			if(i!=j) { y=a[i]; a[i]=a[j]; a[j]=y; }
+			i++; j--;
+		}
+	}while(i<=j);
+
+	if(l<j) qsort(a,l,j);
+	if(i<r) qsort(a,i,r);
+   }
+
+   function numsort(a,n,local,i,j,t) {
         # Sort n elements of array a, from John Bently
         # a must be indexed numericaly with a base of 1.
         # Use in place of GAWK 3.0.6+ array sorting.
@@ -74,6 +96,32 @@
             a[j] = t
         }
     }
+
+
+  function less_than(left, right) {
+    return "" left <= "" right
+  }
+  function quicksort(data, left, right,   i, last)
+  {
+    if (left >= right)
+      return
+
+    quicksort_swap(data, left, int((left + right) / 2))
+    last = left
+    for (i = left + 1; i <= right; i++)
+      if (less_than(data[i], data[left]))
+        quicksort_swap(data, ++last, i)
+    quicksort_swap(data, left, last)
+    quicksort(data, left, last - 1)
+    quicksort(data, last + 1, right)
+  }
+  function quicksort_swap(data, i, j,   temp)
+  {
+    temp = data[i]
+    data[i] = data[j]
+    data[j] = temp
+  }
+
 
 
 ################################################################################################################
@@ -275,7 +323,9 @@ END {
 # sort output
 # I have implemented a sort function in this script to make it portable to many awk implementations
 
-reportitems = azsort(lineitems)
+
+    for (i in lineitems) keys[n++]=i
+    reportitems = quicksort(keys, 0, n-1)
 
 
 #####################################################################################################
