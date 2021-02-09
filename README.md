@@ -57,7 +57,7 @@ To interpret the output, an understanding of how the program generalises data in
 
     Notice that the profile is more general using this rule, so the profiles match more occurances.  
     This greatly helps to summarise high cardinality data.
-*The Low Cardinality 'L' parameter should be your default for the first pass of a new dataset*
+*The low cardinality grain="L" parameter should be your default for the first pass of a new dataset*
 
 
 ## Technology and Installation
@@ -75,31 +75,36 @@ The later versions of the code have been tested with several implementations of 
     goawk - the implementation of AWK in the language go
     mawk - a highly performance version of awk, optimised for speed
 
-#### install
-    # to install unix like implementations
-    brew install gawk
-    brew install mawk
+#### Installation for a Mac
+    # to install on macOS:
+     
+    > brew install gawk
+    > brew install mawk
 
-    # to install an implemenation in go
-    brew install go
+    # to install goawk, an recent implemenation writen in go
+    > brew install go
+     
     # now link your paths:
-    echo 'export GOPATH="/Users/useraccount/go"' >> ~/.bash_profile
-    echo 'PATH=$PATH:$GOPATH/bin' >> ~/.bash_profile
+    > echo 'export GOPATH="/Users/useraccount/go"' >> ~/.bash_profile
+    > echo 'PATH=$PATH:$GOPATH/bin' >> ~/.bash_profile
+    
     # rerun your bash profile
-    ~/.bash_profile
+    > ~/.bash_profile
+    
     # now use the go package manager to install it in a one-liner
-    go get github.com/benhoyt/goawk
+    $ go get github.com/benhoyt/goawk
+    
     # now test it works!
-    goawk 'BEGIN { print "foo", 42 }'
+    > goawk 'BEGIN { print "foo", 42 }'
     
 There is a timer.log file in the repo - that has a comparison of the performance of these tools. mawk is the fastest. 
 At some point I will do a performance analysis. Also to do - try compiling a version with GRAALVM and testing that.
 
-Note - this code can also be converted to ansi-c and then compiled. This can be done with a variety of compilers. 
-GRAAVM is a potential compilation tool we should test.
+Note - this code can also be converted to ansi-c and then compiled using awka, a recently updated version is here: https://github.com/noyesno/awka
+Once convereted to c, a choice of compilers via LLVM may target your environment better. 
 
 
-Input and Output Configuration options
+# Usage
 
 The code has only a few simple configuration options carefully chosen to meet the needs of many. The three main output choices 
 configurable are:
@@ -125,72 +130,75 @@ output, as when a profile is found that needs investigation, this output can be 
 interest. The simplest was to do this is using filters in excel, but more sophisticated options are also available.
 
 
-Command Line Options
+#### Command Line Options
 The program can be called from the command line as follows in this example:
 
-awk -F"\t" -f bytefreq_v1.04.awk -v header="1" -v report="1" -v grain="L" input.data > output.report.txt
+    awk -F"\t" -f bytefreq_v1.05.awk -v header="1" -v report="1" -v grain="L" testdata/testdata.tab
 
+##### Usage:
 
-Usage:
-
--F"\t"        Use the native -F option in AWK to set your input data file delimiter, also known as it's Field Separator, FS. 
-
+    -F"\t"        Use the native -F option in AWK to set your input data file delimiter, also known as it's Field Separator, FS. Notice there is no space between -F and the delimiter.
+    
 The example above shows the setting for a tab delimited file, but there are many advanced field and record separator 
-choices available if you read the AWK documentation.  
+choices available if you read the AWK documentation. Common delimiters are:   
+     
+     -F"\t"   # tab delimited
+     -F"|"    # pipe delimited
+     -F","    # flat comma delimited - does not meet csv parsing standards -- use python pre-parsing. See *parsers*
+
+Other options to set are:
+
+    -f bytefreq_v1.05.awk        The -f option tells awk to run the profiler code. Be sure to include a fully qualified file path 
+                                 to the code if your working directory is not where the code is sitting. 
 
 
--f bytefreq_v1.05.awk        The -f option tells awk to run the profiler code. Be sure to include a fully qualified file path 
-                             to the code if your working directory is not where the code is sitting. 
+    -v header="1"        The command line option to set the row to use to pick up the headers in the file. 
+                         If you set this value to row 1, it will use the first row as the header row. If you set it to X, the code 
+                         will use the Xth row to pick up headers and ignore all proceeding lines in the file, a feature that can 
+                         occasionally be very handy. The default value of this setting, if not explicitly set on the command 
+                         line is "0", meaning, no header record.
+    -v report="0"        Sets the output to a machine readable profile frequency dataset.
+    -v report="1"        Sets the output to a human readable profile frequency report.
+    -v report="2"        Sets the output to raw + profiled full volume data in a machine readable format.
+    -v grain="L"         Set the Less granular level of pattern formats in the output
+    -v grain="H"         Set the Highly granular level of pattern formats in the output
 
 
--v header="1"        The command line option to set the row to use to pick up the headers in the file. 
-                     If you set this value to row 1, it will use the first row as the header row. If you set it to X, the code 
-                     will use the Xth row to pick up headers and ignore all proceeding lines in the file, a feature that can 
-                     occasionally be very handy. The default value of this setting, if not explicitly set on the command 
-                     line is "0", meaning, no header record.
--v report="0"        Sets the output to a machine readable profile frequency dataset.
--v report="1"        Sets the output to a human readable profile frequency report.
--v report="2"        Sets the output to raw + profiled full volume data in a machine readable format.
--v grain="L"         Set the Less granular level of pattern formats in the output
--v grain="H"         Set the Highly granular level of pattern formats in the output
+    input.data          The file you wish to examine. Note if the working directory doesn't hold the file, you need to set this 
+                        value to being the fully qualified path and file name.
 
 
-input.data          The file you wish to examine. Note if the working directory doesn't hold the file, you need to set this 
-                    value to being the fully qualified path and file name.
+    > output.report.txt        This is the standard unix notation meaning 'redirect the output to a file', which if not set 
+                               means the profiler will output it's metrics to STDOUT (standard out) be sure to use a fully qualified
+                               name if you wish the output to be written to a different folder.
 
 
-> output.report.txt        This is the standard unix notation meaning 'redirect the output to a file', which if not set 
-                           means the profiler will output it's metrics to STDOUT (standard out) be sure to use a fully qualified
-                           name if you wish the output to be written to a different folder.
+#### NOTES ON PARALLEL RUNNING
 
+Should you wish, you can run this program on chunks of data using parallel, using a handy tool found at http://www.gnu.org/software/parallel
 
-NOTES ON PARALLEL RUNNING
-
-Should you wish, you can run this program using parallel, 
-using a handy tool found at http://www.gnu.org/software/parallel
-
-An example of the syntax is:
-
+    An example of the syntax is:
+     
      # create a second test file, we'll try to run these two files in parallel
      cat testdata.tab > testdata2.tab
-
+      
      # pass a file glob to parallel, and run the profiler over the files in parallel. Fold output into single report. 
      ls *.tab | parallel -q gawk -F"\t" -f bytefreq_v1.04.awk -v report="0" -v header="1" -v grain="H" ::: | gawk -F"\t" 'NF==6 {print $0}' > output.rpt
 
 Parallel should be cited if used in acedemic work.
 
-@article{Tange2011a,
-    title = {GNU Parallel - The Command-Line Power Tool},
-    author = {O. Tange},
-    address = {Frederiksberg, Denmark},
-    journal = {;login: The USENIX Magazine},
-    month = {Feb},
-    number = {1},
-    volume = {36},
-    url = {http://www.gnu.org/s/parallel},
-    year = {2011},
-    pages = {42-47},
-    doi = {10.5281/zenodo.16303}
-  }
+    @article{Tange2011a,
+        title = {GNU Parallel - The Command-Line Power Tool},
+        author = {O. Tange},
+        address = {Frederiksberg, Denmark},
+        journal = {;login: The USENIX Magazine},
+        month = {Feb},
+        number = {1},
+        volume = {36},
+        url = {http://www.gnu.org/s/parallel},
+        year = {2011},
+        pages = {42-47},
+        doi = {10.5281/zenodo.16303}
+        }
 
 
