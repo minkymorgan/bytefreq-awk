@@ -57,10 +57,10 @@ To interpret the output, an understanding of how the program generalises data in
 
     Notice that the profile is more general using this rule, so the profiles match more occurances.  
     This greatly helps to summarise high cardinality data.
-    *This should be your default for the first pass of a new dataset*
+*The Low Cardinality 'L' parameter should be your default for the first pass of a new dataset*
 
 
-## Technology
+## Technology and Installation
 
 The profiler is written in awk language, and there is a very specific reason for this. It is a "domain specific language" having a POSIX definition, which is stable over time. Code I write today can be run without change for decades to come. The code is also extremely portable. 
  
