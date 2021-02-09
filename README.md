@@ -1,13 +1,13 @@
 # ByteFreq Data Profiler
 
-Author: Andrew J Morgan
-Company: 6point6.co.uk
-Provenance: Forked from an earlier version by the same author here: https://github.com/minkymorgan/bytefreq
-License: GPLv3
+Author: Andrew J Morgan  
+Company: 6point6.co.uk  
+Provenance: Forked from an earlier version by the same author here: https://github.com/minkymorgan/bytefreq  
+License: GPLv3  
 
 
-bytefreq_v1.05.awk
-charfreq.awk
+bytefreq_v1.05.awk  
+charfreq.awk  
 
 ## Introduction
 This is a data quality toolkit for data profiling, written in the portable awk language. The library implements a number of data transformations and reports helping you do data quality studies using Mask-Based Data Profiling techniques.
