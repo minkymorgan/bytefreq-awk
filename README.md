@@ -75,6 +75,18 @@ The later versions of the code have been tested with several implementations of 
     goawk - the implementation of AWK in the language go
     mawk - a highly performance version of awk, optimised for speed
 
+The test scripts can be used to run a performance test on a large file.
+The results I got using the companies house dataset on my mac was:
+
+| Command | Mean [s] | Min [s] | Max [s] | Relative |
+|:---|---:|---:|---:|---:|
+| `. test2.sh mawk` | 36.838 ± 1.661 | 33.435 | 38.606 | 1.00 |
+| `. test2.sh goawk` | 70.097 ± 0.969 | 68.094 | 71.559 | 1.90 ± 0.09 |
+| `. test2.sh gawk` | 110.419 ± 7.839 | 100.522 | 119.452 | 3.00 ± 0.25 |
+| `. test2.sh awk` | 103.201 ± 3.506 | 100.074 | 111.921 | 2.80 ± 0.16 |
+
+
+
 #### Installation for a Mac
     # to install on macOS:
      
