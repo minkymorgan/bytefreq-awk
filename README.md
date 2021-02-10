@@ -85,7 +85,7 @@ The results I got using the companies house dataset on my mac was:
 | `. test2.sh gawk` | 110.419 ± 7.839 | 100.522 | 119.452 | 3.00 ± 0.25 |
 | `. test2.sh awk` | 103.201 ± 3.506 | 100.074 | 111.921 | 2.80 ± 0.16 |
 
-
+*it's worth noting GAWK would be faster if we used it's native sorting function, excluded for portability in this code*
 
 #### Installation for a Mac
     # to install on macOS:
