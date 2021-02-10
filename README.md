@@ -2,21 +2,32 @@
 
 Author: Andrew J Morgan  
 Company: 6point6.co.uk  
-Provenance: Forked from an earlier version by the same author here: https://github.com/minkymorgan/bytefreq  
+Provenance: forked from https://github.com/minkymorgan/bytefreq  
 License: GPLv3  
 
+Main programs:
 
 bytefreq_v1.05.awk  
 charfreq.awk  
 
 ## Introduction
-This is a data quality toolkit for data profiling, written in the portable awk language. The library implements a number of data transformations and reports helping you do data quality studies using Mask-Based Data Profiling techniques.
+*bytefreq*, short for "byte frequency" is a data quality toolkit for data profiling, written in the portable awk language. The library implements a number of data transformations and reports helping you do data quality studies using Mask-Based Data Profiling techniques.
 
 The software enables several outputs, each necessary for a different part of the data quality process. They can be used for data quality inspections, or to preprocess your data to construct an automated data quality monitoring and cleansing engine in downstream tools. 
 
 To interpret the output, an understanding of how the program generalises data into the pattern-string is useful. Below is a description of the two available algorithms you can select from when studying your data, the first resulting in a granular study of your data, and the second a more generalised study of your data. Note the default setting is to produce more granular output.
 
-### Masks
+### bytefreq's Masks
+
+In data profiling a mask is a transformation function that produces a data quality feature, which when summarised reveals insights into data quality.
+bytefreq includes 2 important "masks" commonly used under the hood in high end data profiling tools, shown below.
+
+    1) High Grain	(implemented)
+    2) Low Grain	(implemented)
+    3) DataType Grain	(TODO)
+    4) IsPop Grain	(TODO)
+
+Mask rules are defined below:
 
 #### 'H' Highly Granular Pattern Construction:
 
@@ -97,7 +108,8 @@ The results I got using the companies house dataset on my mac was:
     > brew install go
      
     # now link your paths:
-    > echo 'export GOPATH="/Users/useraccount/go"' >> ~/.bash_profile
+    > thisaccount=`who | sed 's/ .*//g' | head -1`
+    > echo 'export GOPATH="/Users/${thisaccount}/go"' >> ~/.bash_profile
     > echo 'PATH=$PATH:$GOPATH/bin' >> ~/.bash_profile
     
     # rerun your bash profile
