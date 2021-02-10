@@ -354,13 +354,17 @@ NR > header {
                         # below we print out a line of data for each field in this row 
 			print today tabsep FILENAME tabsep NR tabsep temp_colname tabsep grain tabsep pattern tabsep $(field)
 
-		} else { 
-        		allcolumns[field, pattern]++ 
+		} else {
+                        # these are the main places we collect our profile statistics
+                             # allcolumns tracks the count of a pattern in a field 
+        		allcolumns[field, pattern]++
+                             # allpatterns tracks the last seen example of data that created a pattern
 			allpatterns[field, pattern] = $(field)
 		}
 
-
   } # end of for field loop
+
+file_rowcount++
 
 
 # we are are not counting the formats, then just output the row
@@ -373,39 +377,40 @@ if (report == 2) {
 
 ###########################################################################################################
 # process the counts
+# Here we generate the sortable lineitems of our report, later we then sort these, and after output them 
 
 END {
 
   # only do this post analysis where we count.  
   if (report < 2 ) {
 
-	# loop through the number of fields I have, inspect every value in the multidimensional arrary to copy out the field
-        # values into a new array that I can sort then print out.
+	# loop through the number of field+patterns I have, inspect every value in the multidimensional arrary to copy out the field
+        # values into a new array having a line item that I can sort then print out.
 
 		j=1	
 		for( string in allcolumns) {
+
+                        # split the indexed fields of the array (field, pattern) into the components 
 			split(string, separate, SUBSEP)
 
-			# now I can separate my bits of info: field, arrayID, frm_string, count, num 
+			# now I can collect/generate my info: field, arrayID, frm_string, count, num 
 			# with my separated items, retrieve the count for this pattern	
 
 			countval = allcolumns[separate[1], separate[2]]
 			example = allpatterns[string]
 
-			# print(FILENAME" "names[separate[1]]" "(1000000000000 - countval),"\t\t"countval, "\t\t"separate[2])
-				
-			# copy over the report line items into a new array indexed with a sequence number
-
-			# add in a bit here to force column names if no header, to being field_001, field_002 etc
-
-
+                        # if the field name received is null, use the field count to generate a column number based one 
 			if(names[separate[1]] == "" ) {
 				printnames[separate[1]]="##column_"(100000000+separate[1])
 			} else {
 				printnames[separate[1]]=names[separate[1]]
 			} # end of field name check
 
-			linetext=FILENAME"|"printnames[separate[1]]"|"(1000000000000 - countval)"|"countval"|"separate[2]"\t\t"example
+                        # next take the original value of the pattern counter and generate something we can sort DESC
+                        sortablecount = "1"(1000000000 - countval)
+                        
+
+			linetext=FILENAME"|"printnames[separate[1]]"|"sortablecount"|"countval"|"separate[2]"\t\t"example
 			lineitems[j]=linetext
 	
 		j++		
@@ -419,8 +424,6 @@ END {
     print("#### TEST :lineitems count is: "countof_reportitems) 
 
     quicksort(lineitems, reportitems_idx, 1, countof_reportitems)
-
-
     
 #####################################################################################################
 
@@ -448,14 +451,16 @@ END {
 
 			# now split the line to remove my internal sort key, that's the 100000000 - count thing.
 			# below we retrive the line via the sorted re-index
-			currline = lineitems[reportitems_idx[line]]
 
+			currline = lineitems[reportitems_idx[line]]
+                        
 			split(currline, linefield, "|")
 
+                        # the linefield[] array holds the report data stored like this: 
+                        #     FILENAME"|"printnames[separate[1]]"|"sortablecount"|"countval"|"separate[2]"\t\t"example
+ 
 			# Don't forget to clean off the sort key from unheadered field names
                         finalcolname = linefield[2]
-			#gsub(/##column_1000/,"col_",finalcolname) 
-			
 			
 			# print off the final sorted report line items
 
@@ -479,11 +484,12 @@ END {
 					gsub(/./,"=",fhead)
 				 	gsub(/./,"=",fcol)
 					print(fhead"\t"fcol"\t\t=====\t=======\t\t=======")
-
+                                        #print(linefield[1]"\t"finalcolname"\t"grain"\t"linefield[3]"\t"linefield[4]"\t"linefield[5])
 					print(linefield[1]"\t"finalcolname"\t\t"linefield[4]"\t"linefield[5])		
 					prev_finalcolname=finalcolname	
 				} 
 				else {
+                                        #print(linefield[1]"\t"finalcolname"\t"grain"\t"linefield[3]"\t"linefield[4]"\t"linefield[5])
 					print(linefield[1]"\t"finalcolname"\t\t"linefield[4]"\t"linefield[5])
 					prev_finalcolname=finalcolname	
 				}
