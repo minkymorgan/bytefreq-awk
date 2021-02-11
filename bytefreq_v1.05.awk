@@ -287,7 +287,7 @@ NR == header {
 	  gsub(/ /,"",clean_colname)
 	  gsub(/_/,"",clean_colname)
 	  gsub(/\t/,"",clean_colname)
-	  # gsub(/|/,"",clean_colname)
+	  gsub(/^M/,"",clean_colname)
 
   	 if (field >1) {hout = hout FS}	
 
@@ -334,12 +334,14 @@ NR > header {
  			gsub(/[[:upper:]]/,"A",prof)
  			gsub(/[[:digit:]]/,"9",prof)
 			gsub(/\t/,"T",prof)
+                        gsub(/^M/,"",prof)
 		}
 		else {
 			gsub(/[[:lower:]]+/,"a",prof)
 			gsub(/[[:upper:]]+/,"A",prof)
 			gsub(/[[:digit:]]+/,"9",prof)	
-	                gsub(/\t/,"T",prof)	
+	                gsub(/\t/,"T",prof)
+                        gsub(/^M/,"",prof)	
 		}
 
  		# save the formatted string and increment the count in a big multidimensional array 
