@@ -221,13 +221,15 @@ BEGIN {
 # user defined seed? else set one
 if (seed > 0) {
      seed = seed
+     # now set the seed
+     srand(seed)     
    }
 else {
-     seed = 12345
+#  uncomment below to have a fixed seed if no option set.
+#     seed = 12345
+#     # now set the seed
+#      srand(seed)
 } 
-
-# now set the seed
-srand(seed)
 
 
 # set an index value to support bespoke sort functions
@@ -322,6 +324,7 @@ NR > header {
  # I've changed this to do the find and replace on each field, as nulls were playing up if you didn't specify delim
 
   out = ""
+
   for (field = 1; field <= NF ; field++) {
 
 		prof = $(field);
@@ -464,7 +467,6 @@ END {
 # I have implemented a sort function in this script to make it portable to many awk implementations
 
     for( i in lineitems) countof_reportitems++
-    print("#### TEST :lineitems count is: "countof_reportitems) 
 
     quicksort(lineitems, reportitems_idx, 1, countof_reportitems)
     
@@ -476,17 +478,18 @@ END {
 		#
 
 		if ( report == 1 ){
-		print("\n\n")
+		   print("\n\n")
 
-		print "		----------------------------------------------------------------           "	
-		print "		 bytefreq: portable mask based data profiling for data quality 			"
-		print "		----------------------------------------------------------------			"
-		print ""
-		#print "Author: Andrew Morgan"
-		print ""
-		print("Data Profiling Report: "today) 
-		print ""
-
+		   print "		----------------------------------------------------------------           "	
+		   print "		 bytefreq: portable mask based data profiling for data quality 			"
+		   print "		----------------------------------------------------------------			"
+		   print ""
+		   #print "Author: Andrew Morgan"
+		   print ""
+		   print("Data Profiling Report: "today) 
+		   print("Name of file: " FILENAME)
+		   print("Examined rows: "(NR-header)-1  )
+		   print("")
 		}
 		prev_finalcolname ="X"
 
