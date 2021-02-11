@@ -216,7 +216,21 @@ function quicksort_indices (hash, remap_idx,
 
 BEGIN {
 
-##### sort #### add this in to support our homebrew_asort function
+#### set a random seed to randomise our example strings in our reports
+
+# user defined seed? else set one
+if (seed > 0) {
+     seed = seed
+   }
+else {
+     seed = 12345
+} 
+
+# now set the seed
+srand(seed)
+
+
+# set an index value to support bespoke sort functions
 current_index = 1
 
 
@@ -301,6 +315,8 @@ NR == header {
 
 
 
+################## This is the start of the main block processing ###################
+
 NR > header { 
  # notice we only profile data in the rows AFTER the header, so this can help to skip headers on data produced in reports
  # I've changed this to do the find and replace on each field, as nulls were playing up if you didn't specify delim
@@ -359,7 +375,29 @@ NR > header {
                              # allcolumns tracks the count of a pattern in a field 
         		allcolumns[field, pattern]++
                              # allpatterns tracks the last seen example of data that created a pattern
-			allpatterns[field, pattern] = $(field)
+			     # NOTE: I'm trialling a process to randomise the examples
+                             #       to do that: first example set to 100th or last row, then we back off on chance of example replacement
+                        if (NR  < 101) {
+			    allpatterns[field, pattern] = $(field)
+                            }
+                        else if (NR < 2001) {
+                            r = rand()
+                            if (r < 0.2) {
+                                allpatterns[field, pattern] = $(field)
+                                }
+                            }
+                        else if (NR < 10001) {
+                            r = rand()
+                            if (r < 0.02) {
+                                allpatterns[field, pattern] = $(field)
+                                }
+                            }
+                        else {
+                            r = rand()
+                            if (r < 0.0002) {
+                                allpatterns[field, pattern] = $(field)
+                                } 
+                             } 
 		}
 
   } # end of for field loop
