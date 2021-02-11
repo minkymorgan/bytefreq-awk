@@ -307,7 +307,7 @@ NR == header {
   if (report == 2){
 	print hout
   } else if (report == 3) {
-        print "report_date" tabsep "filename" tabsep "colname" tabsep "RowNum" tabsep "grain" tabsep "profile" tabsep "rawval" 
+        print "report_date" tabsep "filename" tabsep "RowNum" tabsep "colname" tabsep "grain" tabsep "profile" tabsep "rawval" 
   }
 
 
