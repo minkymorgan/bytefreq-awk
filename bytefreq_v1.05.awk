@@ -387,19 +387,19 @@ NR > header {
                             }
                         else if (pattern_count < 30) {
                             r = rand()
-                            if (r < 0.2) {
+                            if (r < 0.05) {
                                 allpatterns[field, pattern] = $(field)
                                 }
                             }
                         else if (pattern_count < 1000) {
                             r = rand()
-                            if (r < 0.02) {
+                            if (r < 0.005) {
                                 allpatterns[field, pattern] = $(field)
                                 }
                             }
                         else {
                             r = rand()
-                            if (r < 0.0002) {
+                            if (r < 0.0001) {
                                 allpatterns[field, pattern] = $(field)
                                 } 
                              } 
