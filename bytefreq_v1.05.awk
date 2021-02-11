@@ -373,20 +373,23 @@ NR > header {
 		} else {
                         # these are the main places we collect our profile statistics
                              # allcolumns tracks the count of a pattern in a field 
+
         		allcolumns[field, pattern]++
+                        pattern_count = allcolumns[field, pattern]
+
                              # allpatterns tracks the last seen example of data that created a pattern
 			     # NOTE: I'm trialling a process to randomise the examples
                              #       to do that: first example set to 100th or last row, then we back off on chance of example replacement
-                        if (NR  < 2001) {
+                        if (pattern_count  < 2001) {
 			    allpatterns[field, pattern] = $(field)
                             }
-                        else if (NR < 10001) {
+                        else if (pattern_count < 10001) {
                             r = rand()
                             if (r < 0.2) {
                                 allpatterns[field, pattern] = $(field)
                                 }
                             }
-                        else if (NR < 100001) {
+                        else if (pattern_count < 100001) {
                             r = rand()
                             if (r < 0.02) {
                                 allpatterns[field, pattern] = $(field)
