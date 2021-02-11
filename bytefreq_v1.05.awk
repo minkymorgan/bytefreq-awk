@@ -377,16 +377,16 @@ NR > header {
                              # allpatterns tracks the last seen example of data that created a pattern
 			     # NOTE: I'm trialling a process to randomise the examples
                              #       to do that: first example set to 100th or last row, then we back off on chance of example replacement
-                        if (NR  < 101) {
+                        if (NR  < 2001) {
 			    allpatterns[field, pattern] = $(field)
                             }
-                        else if (NR < 2001) {
+                        else if (NR < 10001) {
                             r = rand()
                             if (r < 0.2) {
                                 allpatterns[field, pattern] = $(field)
                                 }
                             }
-                        else if (NR < 10001) {
+                        else if (NR < 100001) {
                             r = rand()
                             if (r < 0.02) {
                                 allpatterns[field, pattern] = $(field)
