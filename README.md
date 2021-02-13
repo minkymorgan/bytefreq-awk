@@ -13,7 +13,8 @@ Main programs:
 
 
 ## Introduction
-*bytefreq*, short for "byte frequency" is a data quality toolkit for *deep data quality investigations* for tabular file based data  
+*bytefreq* is a data quality and data profiling toolkit.    
+
 It can be used to:
     1) profile the bytes (characters) in a file 
     2) profile columns per row in a file (find parser errors)
