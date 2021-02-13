@@ -326,7 +326,7 @@ NR == header {
 
 ################## This is the start of the main block processing ###################
 
-NR > header { 
+FNR > header { 
  # notice we only profile data in the rows AFTER the header, so this can help to skip headers on data produced in reports
  # I've changed this to do the find and replace on each field, as nulls were playing up if you didn't specify delim
 
