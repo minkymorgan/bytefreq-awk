@@ -199,7 +199,7 @@ There is a test.sh script available to run. It will check if you have a test fil
 This program relies on the unix command "od" and turns each byte in the file into an octet.      
 
 The awk program then reports frequencies of these in a human readable format.        
-It use is in understanding how to configure parsers for your data.     
+Use it to understand how to configure parsers for your data, and to do deeper investigations into issues.     
 
 Do you set linefeed, or carriage returns, or both? Is the data in ASCII or EBCDIC? Are their odd binary characters in the file? Are there diacrit marks to accommodate?    
 example:
