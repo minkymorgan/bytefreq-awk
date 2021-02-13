@@ -332,6 +332,10 @@ FNR > header {
 
   out = ""
 
+  # before all the profiling, lets track files and their counts
+ 
+  wc[FILENAME]++
+
   for (field = 1; field <= NF ; field++) {
 
 		prof = $(field);
@@ -498,8 +502,14 @@ END {
                    print "#"
                    print "#"
 		   print("# Data Profiling Report: "today) 
-		   print("# Name of file: " FILENAME)
-		   print("# Examined rows: "(NR-header)-1  )
+                   print("#\t", "Lines","\t","Filename")
+                   for (xfiles in wc) {
+                       print("#\t",wc[xfiles], "\t", xfiles) 
+                   }
+
+		   # print("# Name of file: " FILENAME)
+		   # print("# Examined rows: "(NR-header)-1  )
+
 		   print("")
 		}
 		prev_finalcolname ="X"
