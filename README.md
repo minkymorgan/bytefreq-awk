@@ -107,7 +107,11 @@ The results I got using the companies house dataset on my mac was:
 | `. test2.sh gawk` | 110.419 ± 7.839 | 100.522 | 119.452 | 3.00 ± 0.25 |
 | `. test2.sh awk` | 103.201 ± 3.506 | 100.074 | 111.921 | 2.80 ± 0.16 |
 
-*it's worth noting GAWK would be faster if we used it's native sorting function, excluded for portability in this code*
+*it's worth noting GAWK would be faster if we used it's native sorting function, excluded for portability in this code*   
+
+To performance tune on your system and data, check out hyperfine    
+https://github.com/sharkdp/hyperfine/tree/master/doc
+
 
 #### Installation for a Mac
 
@@ -134,9 +138,7 @@ install of goawk:
     
     # now test it works!
     > goawk 'BEGIN { print "foo", 42 }'
-    
-There is a timer.log file in the repo - that has a comparison of the performance of these tools. mawk is the fastest. 
-At some point I will do a performance analysis. Also to do - try compiling a version with GRAALVM and testing that.
+      
 
 Note - this code can also be converted to ansi-c and then compiled using awka, a recently updated version is here: https://github.com/noyesno/awka
 Once convereted to c, a choice of compilers via LLVM may target your environment better. 
