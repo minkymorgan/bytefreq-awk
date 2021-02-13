@@ -146,66 +146,46 @@ Once convereted to c, a choice of compilers via LLVM may target your environment
 
 # Usage
 
-The code has only a few simple configuration options carefully chosen to meet the needs of many. The three main output choices 
-configurable are:
-
--v report ="0" -- (0) produce profile metrics data, directly loadable to a database or data quality rules engine
--v report ="1" -- (1) produce profile metrics text reports, in a format easily printed 
--v report ="2" -- (2) produce a modified copy of your input data, having additional columns containing the calculated profile 
-strings that can be loaded directly to a database or fed into a data quality rules engine.
-
-Option Notes:
-
-For option (0), the profiler will generate a metrics file having 4 column tab delimited file having the following delimited 
-file layout:
-
-<filename><column_identifier><count><pattern>
-
-where the column names specified in the header are prefixed with .col_<column_id>_. 
-
-For option (1) the report output includes these same fields but formatted into a more readable layout as seen in the example
-given in the .What it does. section.
-For option (2), the file will output the original data alongside new columns holding the calculated profiles. This is a critical 
-output, as when a profile is found that needs investigation, this output can be used to find the matching raw data records of 
-interest. The simplest was to do this is using filters in excel, but more sophisticated options are also available.
-
-
-#### Command Line Options
-The program can be called from the command line as follows in this example:
+Run the example:
 
     awk -F"\t" -f bytefreq_v1.05.awk -v header="1" -v report="1" -v grain="L" testdata/testdata.tab
 
-##### Usage:
+    awk -F"\t" -f bytefreq_v1.05.awk -v header="1" -v report="1" -v grain="H" testdata/testdata.tab
 
-    -F"\t"        Use the native -F option in AWK to set your input data file delimiter, also known as it's Field Separator, FS. Notice there is no space between -F and the delimiter.
-    
+
 The example above shows the setting for a tab delimited file, but there are many advanced field and record separator 
 choices available if you read the AWK documentation. Common delimiters are:   
      
      -F"\t"   # tab delimited
      -F"|"    # pipe delimited
-     -F","    # flat comma delimited - does not meet csv parsing standards -- use python pre-parsing. See *parsers*
+     -F","    # flat comma delimited - does not meet csv parsing standards. See *parsers*
 
-Other options to set are:
+Commandline options to set are:
 
     -f bytefreq_v1.05.awk        The -f option tells awk to run the profiler code. Be sure to include a fully qualified file path 
                                  to the code if your working directory is not where the code is sitting. 
-
+ 
+     -F"\t"              # tab delimited
+     -F"|"               # pipe delimited
+     -F","               # flat comma delimited - does not meet csv parsing standards. See *parsers*
 
     -v header="1"        The command line option to set the row to use to pick up the headers in the file. 
                          If you set this value to row 1, it will use the first row as the header row. If you set it to X, the code 
                          will use the Xth row to pick up headers and ignore all proceeding lines in the file, a feature that can 
                          occasionally be very handy. The default value of this setting, if not explicitly set on the command 
                          line is "0", meaning, no header record.
+
     -v report="0"        Sets the output to a machine readable profile frequency dataset.
     -v report="1"        Sets the output to a human readable profile frequency report.
     -v report="2"        Sets the output to raw + profiled full volume data in a machine readable format.
+    -v report="3"        Produces a key/val long format data (incl profiles and raw) for automated DQ remediation tooling. 
+
     -v grain="L"         Set the Less granular level of pattern formats in the output
     -v grain="H"         Set the Highly granular level of pattern formats in the output
 
 
-    input.data          The file you wish to examine. Note if the working directory doesn't hold the file, you need to set this 
-                        value to being the fully qualified path and file name.
+    input.data           The file you wish to examine. Note if the working directory doesn't hold the file, you need to set this 
+                         value to being the fully qualified path and file name. Can be a file glob. Skip header applied per file.
 
 
     > output.report.txt        This is the standard unix notation meaning 'redirect the output to a file', which if not set 
