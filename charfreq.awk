@@ -264,7 +264,7 @@ ref["377"]=" ÿ    255 0xFF 11111111 Latin small letter y with diaeresis "
 
 
  # define report header
-  var1="OCT"
+  var1=" OCT"
   var2="FREQ"
   var3=" CHAR DEC HEX  BINARY   DESCRIPTION"
   var4=" ____ ___ ____ ________ ___________"
@@ -272,7 +272,7 @@ ref["377"]=" ÿ    255 0xFF 11111111 Latin small letter y with diaeresis "
  # print formatted header
  
  printf "%-4s %-14s %s\n", var1, var2, var3
- printf "%-4s %-14s %s\n", "___", "____", var4
+ printf "%-4s %-14s %s\n", " ___", "____", var4
 
 } # end of begin
 
