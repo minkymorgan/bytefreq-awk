@@ -3,28 +3,32 @@
 #----------------------------------------------------------------#
 #
 #             
-#              |       |     
-#              |--\  /-|-.-.             .
-#              |__/\/  | \/_            . :.
-#               ___/__  __ __  __   ___/ . .
-#              / ._|| | | || \/  \ / _ \ . : .: 
-#              \_  \| |_| || | | || [_] | .. 
-#              \___/|____/||_|_|_| \___/ ..
-#                                  / . ..  .:
-#                                   .: .  .:  
+#               __               _       _    __   
+#              / /_  _ __   ___ (_)_ __ | |_ / /_  
+#             | '_ \| '_ \ / _ \| | '_ \| __| '_ \ 
+#             | (_) | |_) | (_) | | | | | |_| (_) |
+#              \___/| .__/ \___/|_|_| |_|\__|\___/ 
+#                   |_|                            
+#             
 #                
 #
 # Data Strategy | Data Architecture | Data Science & Engineering 
 #----------------------------------------------------------------#
 #
-# ByteFreq_1.0.5 Data Profiling Software
-# Copyright ByteSumo Limited, 2014-2021. All rights reserved.
+# ByteFreq_1.0.5 Mask Based Data Profiling
 # License: GPLv3
+# Author: Andrew Morgan
 #
 # Instructions for use
 # 
 # DEPENDECIES:
-# Install or upgrade gawk. On a mac, "brew install gawk". I suggest you also get gsed. "brew install gsed"
+# This code is in POSIX compliant awk. It should work with any compliant awk interpreter.
+# It's tested against awk, gawk, mawk, goawk
+
+# PERFORMANCE:
+# It performs fastest with mawk. brew install mawk
+# Gawk is recommended, is excellent and maintained. 
+# On a mac, "brew install gawk". I suggest you also get gsed. "brew install gsed"
 #
 # USAGE:
 # on the commandline, you call the profiler as a gawk script, here are some examples, which is also the test suite data:
@@ -481,17 +485,21 @@ END {
 		#
 
 		if ( report == 1 ){
-		   print("\n\n")
-
-		   print "		----------------------------------------------------------------           "	
-		   print "		 bytefreq: portable mask based data profiling for data quality 			"
-		   print "		----------------------------------------------------------------			"
-		   print ""
-		   #print "Author: Andrew Morgan"
-		   print ""
-		   print("Data Profiling Report: "today) 
-		   print("Name of file: " FILENAME)
-		   print("Examined rows: "(NR-header)-1  )
+                   print "#"
+                   print "#"
+                   print "#"
+                   print "#"
+		   print "#		----------------------------------------------------------------           "	
+		   print "#		 bytefreq: portable mask based data profiling for data quality 			"
+		   print "#		----------------------------------------------------------------			"
+		   print "#"
+		   print "# Version: bytefreq_v1.05.awk"
+                   print "# Project: https://github.com/6point6/bytefreq"
+                   print "#"
+                   print "#"
+		   print("# Data Profiling Report: "today) 
+		   print("# Name of file: " FILENAME)
+		   print("# Examined rows: "(NR-header)-1  )
 		   print("")
 		}
 		prev_finalcolname ="X"
