@@ -144,9 +144,9 @@ Note - this code can also be converted to ansi-c and then compiled using awka, a
 Once convereted to c, a choice of compilers via LLVM may target your environment better. 
 
 
-# Usage
+# Usage - bytefreq 
 
-Run the example:
+Run the data profiler example:
 
     awk -F"\t" -f bytefreq_v1.05.awk -v header="1" -v report="1" -v grain="L" testdata/testdata.tab
 
@@ -192,3 +192,45 @@ Commandline options to set are:
                                means the profiler will output it's metrics to STDOUT (standard out) be sure to use a fully qualified
                                name if you wish the output to be written to a different folder.
 
+# Usage - charfreq
+
+This program relies on the unix command "od" and turns each byte in the file into an octet.      
+
+The awk program then reports these in a human readable format.        
+It use is in understanding how to configure parsers for your data.     
+
+Do you set linefeed, or carriage returns, or both?     
+Is the data in ASCII or EBCDIC? Are their odd binary characters in the file?     
+Are there troublesome backticks in the file?     
+
+example:
+
+     od -cb testdata/testdata.tab | awk -f charfreq.awk | sort -n
+
+# Usage - fieldprofile.awk
+
+This program helps to prove your parsers worked. It counts the fields per row, and reports on them.    
+If your parsers failed, you will see there are some rows with the wrong number of fields.     
+(These rows can be silently dropped by many programs - best to handle them explicity)
+
+    awk -F"\t" -f fieldprofiler.awk testdata/*.tab | column -t -s $'\t'
+
+example output:    
+
+    filename                RowCount  NumFieldsSeen
+    testdata/testdata.tab   1         0
+    testdata/testdata.tab   1         12
+    testdata/testdata.tab   1         5
+    testdata/testdata.tab   49        16
+    testdata/testdata2.tab  1         0
+    testdata/testdata2.tab  1         12
+    testdata/testdata2.tab  1         5
+    testdata/testdata2.tab  49        16
+    testdata/testdata3.tab  1         0
+    testdata/testdata3.tab  1         12
+    testdata/testdata3.tab  1         5
+    testdata/testdata3.tab  49        16
+
+
+
+ 
