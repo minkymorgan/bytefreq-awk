@@ -7,13 +7,20 @@ License: GPLv3
 
 Main programs:
 
-bytefreq_v1.05.awk  
-charfreq.awk  
-fieldprofiler.awk
+*bytefreq_v1.05.awk*  
+*charfreq.awk*  
+*fieldprofiler.awk*
 
 
 ## Introduction
-*bytefreq*, short for "byte frequency" is a data quality toolkit for data profiling, written in the portable awk language. The library implements a number of data transformations and reports helping you do data quality studies using Mask-Based Data Profiling techniques.
+*bytefreq*, short for "byte frequency" is a data quality toolkit for *deep data quality investigations* for tabular file based data  
+It can be used to:
+    1) profile the bytes (characters) in a file 
+    2) profile columns per row in a file (find parser errors)
+    3) generate Mask-Based data profiling reports at multiple grains
+    4) generate datasets suitable for data quality remediation engines
+
+It is written in the portable awk language. The library implements a number of data transformations and reports helping you do data quality studies using Mask-Based Data Profiling techniques.
 
 The software enables several outputs, each necessary for a different part of the data quality process. They can be used for data quality inspections, or to preprocess your data to construct an automated data quality monitoring and cleansing engines in downstream tools. 
 
@@ -83,7 +90,7 @@ In addition to code being able to run on any unix system, it can also be run on 
 
 The later versions of the code have been tested with several implementations of the awk language:
 
-    awk - as available as standard in MacOS
+    awk - available as standard in MacOS
     gawk - the GNU version of AWK, available for every 'nix system you can imagine.
     goawk - the implementation of AWK in the language go
     mawk - a high performance version of awk, optimised for speed
@@ -109,7 +116,7 @@ The results I got using the companies house dataset on my mac was:
 
 install of goawk:
 
-    # to install goawk, an recent implemenation writen in go
+    # to install goawk, an excellent implemenation writen in go
     > brew install go
      
     # now link your paths:
@@ -200,34 +207,4 @@ Other options to set are:
     > output.report.txt        This is the standard unix notation meaning 'redirect the output to a file', which if not set 
                                means the profiler will output it's metrics to STDOUT (standard out) be sure to use a fully qualified
                                name if you wish the output to be written to a different folder.
-
-
-#### NOTES ON PARALLEL RUNNING
-
-Should you wish, you can run this program on chunks of data using parallel, using a handy tool found at http://www.gnu.org/software/parallel
-
-    An example of the syntax is:
-     
-     # create a second test file, we'll try to run these two files in parallel
-     cat testdata.tab > testdata2.tab
-      
-     # pass a file glob to parallel, and run the profiler over the files in parallel. Fold output into single report. 
-     ls *.tab | parallel -q gawk -F"\t" -f bytefreq_v1.04.awk -v report="0" -v header="1" -v grain="H" ::: | gawk -F"\t" 'NF==6 {print $0}' > output.rpt
-
-Parallel should be cited if used in acedemic work.
-
-    @article{Tange2011a,
-        title = {GNU Parallel - The Command-Line Power Tool},
-        author = {O. Tange},
-        address = {Frederiksberg, Denmark},
-        journal = {;login: The USENIX Magazine},
-        month = {Feb},
-        number = {1},
-        volume = {36},
-        url = {http://www.gnu.org/s/parallel},
-        year = {2011},
-        pages = {42-47},
-        doi = {10.5281/zenodo.16303}
-        }
-
 
