@@ -17,10 +17,10 @@ Main programs:
 
 It can be used to:    
     
-    1) profile the bytes (characters) in a file 
-    2) profile columns per row in a file (find parser errors)
-    3) generate Mask-Based data profiling reports at multiple grains
-    4) generate datasets suitable for data quality remediation engines
+    1) profile the bytes (characters) in a file, using *charfreq.awk* 
+    2) verify parsing of columns correct, using *fieldprofiler.awk*
+    3) generate Mask-Based data profiling reports, with choice of mask
+    4) generate profiled datasets for data quality remediation engines
 
 It is written in the portable awk language. The library implements a number of data transformations and reports helping you do data quality studies using Mask-Based Data Profiling techniques.
 
@@ -84,8 +84,8 @@ Mask rules are defined below:
 
 ## Technology and Installation
 
-The profiler is written in awk language, and there is a very specific reason for this. It is a "domain specific language" having a POSIX definition, which is stable over time. Code I write today can be run without change for decades to come. The code is also extremely portable. 
- 
+The profiler is written in awk language. Why AWK? It is extremely portable, trusted and reliable. It is POSIX compliant and here to stay. 
+
 *awk* the tool, not the language, is a core part of the unstripped unix kernal, and as such, is both robust and ubiquitous in all types of computing environments. This means the profiler can be introduced to highly locked down production systems - and can be run without installing new software. This is very useful - allowing one to retrofit data quality monitoring into production ETL systems with minimal governance overhead, and minimal risk to the existing services hosted apart from processing load. 
 
 In addition to code being able to run on any unix system, it can also be run on windows systems. There is a compiled 64-bit version of awk released here: https://github.com/p-j-miller/wmawk2 Also - there are some linux emulators such as MKS (a 64-bit closed-source unix emulator for windows) or cygwin (a 32-bit open-source unix emulator for windows), both of which are common in enterprise production environments.
@@ -154,12 +154,8 @@ Run the data profiler example:
 
 
 The example above shows the setting for a tab delimited file, but there are many advanced field and record separator 
-choices available if you read the AWK documentation. Common delimiters are:   
+choices available if you read the AWK documentation.    
      
-     -F"\t"   # tab delimited
-     -F"|"    # pipe delimited
-     -F","    # flat comma delimited - does not meet csv parsing standards. See *parsers*
-
 Commandline options to set are:
 
     -f bytefreq_v1.05.awk        The -f option tells awk to run the profiler code. Be sure to include a fully qualified file path 
