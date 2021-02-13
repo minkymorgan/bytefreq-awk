@@ -9,11 +9,13 @@ Main programs:
 
 bytefreq_v1.05.awk  
 charfreq.awk  
+fieldprofiler.awk
+
 
 ## Introduction
 *bytefreq*, short for "byte frequency" is a data quality toolkit for data profiling, written in the portable awk language. The library implements a number of data transformations and reports helping you do data quality studies using Mask-Based Data Profiling techniques.
 
-The software enables several outputs, each necessary for a different part of the data quality process. They can be used for data quality inspections, or to preprocess your data to construct an automated data quality monitoring and cleansing engine in downstream tools. 
+The software enables several outputs, each necessary for a different part of the data quality process. They can be used for data quality inspections, or to preprocess your data to construct an automated data quality monitoring and cleansing engines in downstream tools. 
 
 To interpret the output, an understanding of how the program generalises data into the pattern-string is useful. Below is a description of the two available algorithms you can select from when studying your data, the first resulting in a granular study of your data, and the second a more generalised study of your data. Note the default setting is to produce more granular output.
 
@@ -84,7 +86,7 @@ The later versions of the code have been tested with several implementations of 
     awk - as available as standard in MacOS
     gawk - the GNU version of AWK, available for every 'nix system you can imagine.
     goawk - the implementation of AWK in the language go
-    mawk - a highly performance version of awk, optimised for speed
+    mawk - a high performance version of awk, optimised for speed
 
 The test scripts can be used to run a performance test on a large file.
 The results I got using the companies house dataset on my mac was:
