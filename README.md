@@ -17,8 +17,8 @@ Main programs:
 
 It can be used to:    
     
-    1) profile the bytes (characters) in a file, using *charfreq.awk* 
-    2) verify parsing of columns correct, using *fieldprofiler.awk*
+    1) profile the bytes (characters) in a file, using charfreq.awk 
+    2) verify parsing of columns correct, using fieldprofiler.awk
     3) generate Mask-Based data profiling reports, with choice of mask
     4) generate profiled datasets for data quality remediation engines
 
