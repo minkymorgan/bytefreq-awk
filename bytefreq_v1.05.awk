@@ -316,7 +316,7 @@ NR == header {
   if (report == 2){
 	print hout
   } else if (report == 3) {
-        print "report_date" tabsep "filename" tabsep "RowNum" tabsep "colname" tabsep "grain" tabsep "profile" tabsep "rawval" 
+        print "report_date" tabsep "filename" tabsep "RunRowNum" tabsep "SourceRowNum" tabsep "colname" tabsep "grain" tabsep "profile" tabsep "rawval" 
   }
 
 
@@ -383,8 +383,9 @@ FNR > header {
 			} else {
 				temp_colname = "col_"temp_colname
  			}
+                        # REPORT == 3
                         # below we print out a line of data for each field in this row 
-			print today tabsep FILENAME tabsep NR tabsep temp_colname tabsep grain tabsep pattern tabsep $(field)
+			print today tabsep FILENAME tabsep NR tabsep FNR tabsep temp_colname tabsep grain tabsep pattern tabsep $(field)
 
 		} else {
                         # these are the main places we collect our profile statistics
