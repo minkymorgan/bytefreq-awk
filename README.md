@@ -15,7 +15,8 @@ Main programs:
 ## Introduction
 *bytefreq* is a data quality and data profiling toolkit.    
 
-It can be used to:
+It can be used to:    
+    
     1) profile the bytes (characters) in a file 
     2) profile columns per row in a file (find parser errors)
     3) generate Mask-Based data profiling reports at multiple grains
