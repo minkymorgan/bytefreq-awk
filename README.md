@@ -101,10 +101,13 @@ The results I got using the companies house dataset on my mac was:
 *it's worth noting GAWK would be faster if we used it's native sorting function, excluded for portability in this code*
 
 #### Installation for a Mac
+
     # to install on macOS:
      
     > brew install gawk
     > brew install mawk
+
+install of goawk:
 
     # to install goawk, an recent implemenation writen in go
     > brew install go
