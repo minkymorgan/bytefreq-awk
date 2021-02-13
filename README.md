@@ -188,17 +188,20 @@ Commandline options to set are:
                                means the profiler will output it's metrics to STDOUT (standard out) be sure to use a fully qualified
                                name if you wish the output to be written to a different folder.
 
+
+There is a test.sh script available to run. It will check if you have a test file sourced from the UK Companies House website, and if not fetch it with wget, and then step by step run a full size example of the tools included in this repo.    
+
+     # run it with your implementation preference, as a parameter:
+     . test.sh gawk
+
 # Usage - charfreq
 
 This program relies on the unix command "od" and turns each byte in the file into an octet.      
 
-The awk program then reports these in a human readable format.        
+The awk program then reports frequencies of these in a human readable format.        
 It use is in understanding how to configure parsers for your data.     
 
-Do you set linefeed, or carriage returns, or both?     
-Is the data in ASCII or EBCDIC? Are their odd binary characters in the file?     
-Are there troublesome backticks in the file?     
-
+Do you set linefeed, or carriage returns, or both? Is the data in ASCII or EBCDIC? Are their odd binary characters in the file? Are there diacrit marks to accommodate?    
 example:
 
      od -cb testdata/testdata.tab | awk -f charfreq.awk | sort -n
