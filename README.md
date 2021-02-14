@@ -298,11 +298,10 @@ which produces:
      testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip	col_00010_RegAddress.PostCode		1	A;A9 9A		L;N9 6NE
 
 
-From this snippet of the report - notice how we have summarised nearly 100k of values into a short summary that highlights the long tail of poor quality records.
-This summary establishes that the majority of data conforms into two formats: "A9 9A" or "A9A 9A" and we can now focus on the long tail of non-conforming records.   
+From this snippet of the report - notice we have summarised nearly 100k of values into a short list that puts emphasis on the long tail of poor quality records.
+Our inspection teaches us that the majority of postcodes fall into two formats: "A9 9A" and "A9A 9A", and there is a tail of dubious non-conforming records we should examine.   
+If we were to double check the long tail, we would quickly understand if these are exceptions, mistakes, or a mix, and could create remediation strategies.
 
-Over 11k businesses in this file have no postcode, which is very odd for a legal address. The next ten examples show short or malformatted postcodes.     
-In some cases these might be easily fixed. For example replacing multiple contiguous spaces with a single space is an easy remediation rule.
 
 
 
