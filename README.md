@@ -201,7 +201,7 @@ This program relies on the unix command "od" and turns each byte in the file int
 The awk program then reports frequencies of these in a human readable format.        
 Use it to understand how to configure parsers for your data, and to do deeper investigations into issues.     
 
-Do you set linefeed, or carriage returns, or both? Is the data in ASCII or EBCDIC? Are their odd binary characters in the file? Are there diacrit marks to accommodate?    
+Do you set linefeed, or carriage returns, or both? Is the data in ASCII or EBCDIC? Are there odd binary characters in the file? Are there diacrit marks to accommodate?    
 example:
 
      od -cb testdata/testdata.tab | awk -f charfreq.awk | sort -n
