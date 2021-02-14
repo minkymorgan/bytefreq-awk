@@ -189,10 +189,7 @@ Commandline options to set are:
                                name if you wish the output to be written to a different folder.
 
 
-There is a test.sh script available to run. It will check if you have a test file sourced from the UK Companies House website, and if not fetch it with wget, and then step by step run a full size example of the tools included in this repo.    
-
-     # run it with your implementation preference, as a parameter:
-     . test.sh gawk
+There is a test.sh script available to run. It has examples that are worth examining.
 
 # Usage - charfreq
 
@@ -237,7 +234,14 @@ In the UK, the postcode is a codified string constructed from an Incode and an O
 The UK Companies House file in our test scripts, holds official registration details for the legal companies in the UK. Ideally, the postcodes would be correct.
 Are they?
 
-Here is an example output of a Low grain pass of the profiler:
+The repo includes a comprehensive *test.sh* script that will download the real data, and run the analysis for you. Try it out.
+
+     # run it with your implementation preference, as a parameter:
+     . test.sh gawk
+
+It will fetch the data, unzip it, parse it, profile it, and report on it in the /out directory. 
+
+Below is an example you can regenerate yourself, of a Low grain pass of the profiler on the PostCode field:
 
     > head -15 out/UkCompanySample.rpt1.txt; cat out/UkCompanySample.rpt1.txt | grep -i postcode 
 
