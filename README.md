@@ -290,7 +290,6 @@ which produces:
      col_00010_RegAddress.PostCode	1       A         9A9
      col_00010_RegAddress.PostCode	1       A         A
      col_00010_RegAddress.PostCode	1       A-9       LT-44248
-     col_00010_RegAddress.PostCode	1       A-9       9
      col_00010_RegAddress.PostCode	1       A9        9A
      col_00010_RegAddress.PostCode	1       A9        9A9
      col_00010_RegAddress.PostCode	1       A9.9A     W13.9ED
