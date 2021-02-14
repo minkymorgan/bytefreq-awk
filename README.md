@@ -304,8 +304,42 @@ From this snippet of the report - notice we have summarised nearly 600,000 data 
 Our inspection teaches us that the majority of postcodes fall into two formats: "A9 9A" and "A9A 9A", and there is a tail of dubious non-conforming records we should examine.   
 If we were to double check the long tail, we would quickly understand if these are exceptions, mistakes, or a mix, and could create remediation strategies.
 
+To find the exact datapoints having the bad postcodes, we can run the following to find the first 30 real examples:
 
+     # this line will read all datapoints for the postcode column, and exclude all "good" postcode formats. I've taken the top 30 bad records, and formatted them for inspection:
 
+     cat out/UkCompanySample.raw3.txt | grep "RowNum\|col_00010_RegAddress.PostCode" | grep -v "\tA9 9A\t\|\tA9A 9A\t\|<<null>>" | head -30 |column -t -s $'\t' 
+
+     report_date          filename                                              RowNum  colname                        grain  profile  rawval
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  2058    col_00010_RegAddress.PostCode  L      A9A      NG235ED
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  7519    col_00010_RegAddress.PostCode  L      A9A      TW89LF
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  8027    col_00010_RegAddress.PostCode  L      9        8022
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  11826   col_00010_RegAddress.PostCode  L      A9 A     IP1 JJ
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  13338   col_00010_RegAddress.PostCode  L      A9A      GU478QN
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  17969   col_00010_RegAddress.PostCode  L      A9A      NE349PE
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  19350   col_00010_RegAddress.PostCode  L      A9A 9 A  EC1V 1 NR
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  20925   col_00010_RegAddress.PostCode  L      A9 9A.   BR5 3RX.
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  27013   col_00010_RegAddress.PostCode  L      A9 9 A   SW18 4 UH
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  27746   col_00010_RegAddress.PostCode  L      A9 A     BA14 HHD
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  30151   col_00010_RegAddress.PostCode  L      A9       BB14006
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  31997   col_00010_RegAddress.PostCode  L      A9A      DE248UQ
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  40692   col_00010_RegAddress.PostCode  L      A9A9A    EC1V2NX
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  40803   col_00010_RegAddress.PostCode  L      A 9      BLOCK 3
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  44375   col_00010_RegAddress.PostCode  L      A9A      NP79BT
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  44648   col_00010_RegAddress.PostCode  L      A9A      CO92NU
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  45701   col_00010_RegAddress.PostCode  L      A 9A     CRO 9XP
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  48052   col_00010_RegAddress.PostCode  L      9 9      20 052
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  49938   col_00010_RegAddress.PostCode  L      A9A      BS164QG
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  50668   col_00010_RegAddress.PostCode  L      A;A9 9A  L;N9 6NE
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  51579   col_00010_RegAddress.PostCode  L      A9 9 A   WR9 9 AY
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  59153   col_00010_RegAddress.PostCode  L      A9   9A  M2   2EE
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  59916   col_00010_RegAddress.PostCode  L      A9A  9A  W1K  3JZ
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  60279   col_00010_RegAddress.PostCode  L      A9A      SK104NY
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  60897   col_00010_RegAddress.PostCode  L      9        0255
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  64723   col_00010_RegAddress.PostCode  L      9        94596
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  64946   col_00010_RegAddress.PostCode  L      A9A      YO152QD
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  67080   col_00010_RegAddress.PostCode  L      A9       SW1
+     2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  68410   col_00010_RegAddress.PostCode  L      9A A     2L ONE
 
 
 
