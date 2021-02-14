@@ -342,9 +342,3 @@ To find the exact datapoints having the bad postcodes, we can run the following 
      2021-02-11 23:32:31  testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip  68410   col_00010_RegAddress.PostCode  L      9A A     2L ONE
 
 
-
-
-
-
-
- 
