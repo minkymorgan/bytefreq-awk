@@ -295,7 +295,7 @@ which produces:
      col_00010_RegAddress.PostCode	1       A9.9A     W13.9ED
      col_00010_RegAddress.PostCode	1       A;A9      9A 
      
-From this snippet of the report - notice we have summarised nearly 100k of values into a short list that puts emphasis on the long tail of poor quality records.
+From this snippet of the report - notice we have summarised nearly 600,000 data point values into a short list to review that puts emphasis squarely on the long tail of poor quality records.
 Our inspection teaches us that the majority of postcodes fall into two formats: "A9 9A" and "A9A 9A", and there is a tail of dubious non-conforming records we should examine.   
 If we were to double check the long tail, we would quickly understand if these are exceptions, mistakes, or a mix, and could create remediation strategies.
 
