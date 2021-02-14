@@ -256,8 +256,8 @@ which produces:
      Examined rows: 592242
      
      
-     file                                                	column               		count	pattern			example
-     ====================================================	=====================		=====	=======			=======
+     file                                                	column               			count	pattern		example
+     ====================================================	=====================			=====	=======		=======
      testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip	col_00010_RegAddress.PostCode		533108	A9 9A		RM10 9RJ
      testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip	col_00010_RegAddress.PostCode		47398	A9A 9A		WC1B 3SR
      testdata/BasicCompanyData-2021-02-01-part6_6.csv.pip	col_00010_RegAddress.PostCode		11437	<<null>>		
