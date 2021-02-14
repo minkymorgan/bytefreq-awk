@@ -271,30 +271,30 @@ which produces:
      col_00010_RegAddress.PostCode 	7       A         9
      col_00010_RegAddress.PostCode 	6       A9        9A.
      col_00010_RegAddress.PostCode 	6       A9A       9A
-     col_00010_RegAddress.PostCode 	5       9A9       9A
-     col_00010_RegAddress.PostCode 	5       A         9
-     col_00010_RegAddress.PostCode  	5       A9        9A
-     col_00010_RegAddress.PostCode  	4       A9        A9A
-     col_00010_RegAddress.PostCode  	3       A         SHROPSHIRE
-     col_00010_RegAddress.PostCode  	3       A9        A9
-     col_00010_RegAddress.PostCode  	3       A9-9      KY1-1003
-     col_00010_RegAddress.PostCode  	2       9A        1017BT
-     col_00010_RegAddress.PostCode  	2       A9        9
-     col_00010_RegAddress.PostCode  	2       A9        9A9
-     col_00010_RegAddress.PostCode  	2       A9        A
-     col_00010_RegAddress.PostCode  	2       A9A       9
-     col_00010_RegAddress.PostCode  	2       A9A       9A.
-     col_00010_RegAddress.PostCode  	2       A9A       9A9
-     col_00010_RegAddress.PostCode  	2       A9A9A     SW1E5NE
-     col_00010_RegAddress.PostCode  	1       9A        A
-     col_00010_RegAddress.PostCode  	1       A         9A9
-     col_00010_RegAddress.PostCode  	1       A         A
-     col_00010_RegAddress.PostCode  	1       A-9       LT-44248
-     col_00010_RegAddress.PostCode  	1       A-9       9
-     col_00010_RegAddress.PostCode  	1       A9        9A
-     col_00010_RegAddress.PostCode  	1       A9        9A9
-     col_00010_RegAddress.PostCode  	1       A9.9A     W13.9ED
-     col_00010_RegAddress.PostCode  	1       A;A9      9A 
+     col_00010_RegAddress.PostCode	5       9A9       9A
+     col_00010_RegAddress.PostCode	5       A         9
+     col_00010_RegAddress.PostCode	5       A9        9A
+     col_00010_RegAddress.PostCode	4       A9        A9A
+     col_00010_RegAddress.PostCode	3       A         SHROPSHIRE
+     col_00010_RegAddress.PostCode	3       A9        A9
+     col_00010_RegAddress.PostCode	3       A9-9      KY1-1003
+     col_00010_RegAddress.PostCode	2       9A        1017BT
+     col_00010_RegAddress.PostCode	2       A9        9
+     col_00010_RegAddress.PostCode	2       A9        9A9
+     col_00010_RegAddress.PostCode	2       A9        A
+     col_00010_RegAddress.PostCode	2       A9A       9
+     col_00010_RegAddress.PostCode	2       A9A       9A.
+     col_00010_RegAddress.PostCode	2       A9A       9A9
+     col_00010_RegAddress.PostCode	2       A9A9A     SW1E5NE
+     col_00010_RegAddress.PostCode	1       9A        A
+     col_00010_RegAddress.PostCode	1       A         9A9
+     col_00010_RegAddress.PostCode	1       A         A
+     col_00010_RegAddress.PostCode	1       A-9       LT-44248
+     col_00010_RegAddress.PostCode	1       A-9       9
+     col_00010_RegAddress.PostCode	1       A9        9A
+     col_00010_RegAddress.PostCode	1       A9        9A9
+     col_00010_RegAddress.PostCode	1       A9.9A     W13.9ED
+     col_00010_RegAddress.PostCode	1       A;A9      9A 
      
 From this snippet of the report - notice we have summarised nearly 100k of values into a short list that puts emphasis on the long tail of poor quality records.
 Our inspection teaches us that the majority of postcodes fall into two formats: "A9 9A" and "A9A 9A", and there is a tail of dubious non-conforming records we should examine.   
