@@ -1,0 +1,72 @@
+running this script with awk
+awk: GENERATE HUMAN READABLE REPORT - popular eyeball inspection report
+
+real	1m40.592s
+user	1m40.157s
+sys	0m0.385s
+running this script with awk
+awk: GENERATE HUMAN READABLE REPORT - popular eyeball inspection report
+
+real	1m40.619s
+user	1m40.150s
+sys	0m0.408s
+running this script with awk
+awk: GENERATE HUMAN READABLE REPORT - popular eyeball inspection report
+
+real	1m45.222s
+user	1m44.582s
+sys	0m0.530s
+running this script with gawk
+gawk: GENERATE HUMAN READABLE REPORT - popular eyeball inspection report
+
+real	1m35.135s
+user	1m34.989s
+sys	0m0.099s
+running this script with gawk
+gawk: GENERATE HUMAN READABLE REPORT - popular eyeball inspection report
+
+real	1m39.153s
+user	1m38.996s
+sys	0m0.109s
+running this script with gawk
+gawk: GENERATE HUMAN READABLE REPORT - popular eyeball inspection report
+
+real	1m35.597s
+user	1m35.465s
+sys	0m0.100s
+running this script with goawk
+goawk: GENERATE HUMAN READABLE REPORT - popular eyeball inspection report
+
+real	1m0.136s
+user	1m3.125s
+sys	0m0.789s
+running this script with goawk
+goawk: GENERATE HUMAN READABLE REPORT - popular eyeball inspection report
+
+real	0m58.478s
+user	1m1.474s
+sys	0m0.767s
+running this script with goawk
+goawk: GENERATE HUMAN READABLE REPORT - popular eyeball inspection report
+
+real	0m58.912s
+user	1m2.044s
+sys	0m0.823s
+running this script with mawk
+mawk: GENERATE HUMAN READABLE REPORT - popular eyeball inspection report
+
+real	0m30.539s
+user	0m30.444s
+sys	0m0.075s
+running this script with mawk
+mawk: GENERATE HUMAN READABLE REPORT - popular eyeball inspection report
+
+real	0m30.201s
+user	0m30.114s
+sys	0m0.073s
+running this script with mawk
+mawk: GENERATE HUMAN READABLE REPORT - popular eyeball inspection report
+
+real	0m30.288s
+user	0m30.186s
+sys	0m0.080s

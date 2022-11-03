@@ -39,7 +39,7 @@ ref["036"]=" RS   030 0x1E 00011110 Record Separator "
 ref["037"]=" US   031 0x1F 00011111 Unit Separator "
 ref["040"]="      032 0x20 00100000 Space "
 ref["041"]=" !    033 0x21 00100001 Exclamation mark "
-ref["042"]=" \"   034 0x22 00100010 Double quotes (or speech marks) "
+ref["042"]=" \"    034 0x22 00100010 Double quotes (or speech marks) "
 ref["043"]=" #    035 0x23 00100011 Number "
 ref["044"]=" $    036 0x24 00100100 Dollar "
 ref["045"]=" %    037 0x25 00100101 Procenttecken "
@@ -97,11 +97,11 @@ ref["130"]=" X    088 0x58 01011000 Uppercase X "
 ref["131"]=" Y    089 0x59 01011001 Uppercase Y "
 ref["132"]=" Z    090 0x5A 01011010 Uppercase Z "
 ref["133"]=" [    091 0x5B 01011011 Opening bracket "
-ref["134"]=" \\   092 0x5C 01011100 Backslash "
+ref["134"]=" \\    092 0x5C 01011100 Backslash "
 ref["135"]=" ]    093 0x5D 01011101 Closing bracket "
 ref["136"]=" ^    094 0x5E 01011110 Caret - circumflex "
 ref["137"]=" _    095 0x5F 01011111 Underscore "
-ref["140"]=" `    096 0x60 01100000 Grave accent "
+ref["140"]=" `    096 0x60 01100000 Backtick / Grave accent "
 ref["141"]=" a    097 0x61 01100001 Lowercase a "
 ref["142"]=" b    098 0x62 01100010 Lowercase b "
 ref["143"]=" c    099 0x63 01100011 Lowercase c "
@@ -264,7 +264,7 @@ ref["377"]=" ÿ    255 0xFF 11111111 Latin small letter y with diaeresis "
 
 
  # define report header
-  var1="OCT"
+  var1=" OCT"
   var2="FREQ"
   var3=" CHAR DEC HEX  BINARY   DESCRIPTION"
   var4=" ____ ___ ____ ________ ___________"
@@ -272,7 +272,7 @@ ref["377"]=" ÿ    255 0xFF 11111111 Latin small letter y with diaeresis "
  # print formatted header
  
  printf "%-4s %-14s %s\n", var1, var2, var3
- printf "%-4s %-14s %s\n", "___", "____", var4
+ printf "%-4s %-14s %s\n", " ___", "____", var4
 
 } # end of begin
 

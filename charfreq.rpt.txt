@@ -1,0 +1,258 @@
+000                  NUL  000 0x00 00000000 Null char 
+OCT  FREQ            CHAR DEC HEX  BINARY   DESCRIPTION
+___  ____            ____ ___ ____ ________ ___________
+001                  SOH  001 0x01 00000001 Start of Heading 
+002                  STX  002 0x02 00000010 Start of Text 
+003                  ETX  003 0x03 00000011 End of Text 
+004                  EOT  004 0x04 00000100 End of Transmission 
+005                  ENQ  005 0x05 00000101 Enquiry 
+006                  ACK  006 0x06 00000110 Acknowledgment 
+007                  BEL  007 0x07 00000111 Bell 
+010                  BS   008 0x08 00001000 Back Space 
+011                  HT   009 0x09 00001001 Horizontal Tab 
+012  592244          LF   010 0x0A 00001010 Line Feed 
+013                  VT   011 0x0B 00001011 Vertical Tab 
+014                  FF   012 0x0C 00001100 Form Feed 
+015                  CR   013 0x0D 00001101 Carriage Return 
+016                  SO   014 0x0E 00001110 Shift Out / X-On 
+017                  SI   015 0x0F 00001111 Shift In / X-Off 
+020                  DLE  016 0x10 00010000 Data Line Escape 
+021                  DC1  017 0x11 00010001 Device Control 1 (oft. XON) 
+022                  DC2  018 0x12 00010010 Device Control 2 
+023                  DC3  019 0x13 00010011 Device Control 3 (oft. XOFF) 
+024                  DC4  020 0x14 00010100 Device Control 4 
+025                  NAK  021 0x15 00010101 Negative Acknowledgement 
+026                  SYN  022 0x16 00010110 Synchronous Idle 
+027                  ETB  023 0x17 00010111 End of Transmit Block 
+030                  CAN  024 0x18 00011000 Cancel 
+031                  EM   025 0x19 00011001 End of Medium 
+032                  SUB  026 0x1A 00011010 Substitute 
+033                  ESC  027 0x1B 00011011 Escape 
+034                  FS   028 0x1C 00011100 File Separator 
+035                  GS   029 0x1D 00011101 Group Separator 
+036                  RS   030 0x1E 00011110 Record Separator 
+037                  US   031 0x1F 00011111 Unit Separator 
+040  11662810             032 0x20 00100000 Space 
+041  309             !    033 0x21 00100001 Exclamation mark 
+042  65146498        "    034 0x22 00100010 Double quotes (or speech marks) 
+043  90              #    035 0x23 00100011 Number 
+044  14              $    036 0x24 00100100 Dollar 
+045  21              %    037 0x25 00100101 Procenttecken 
+046  35233           &    038 0x26 00100110 Ampersand 
+047  36925           '    039 0x27 00100111 Single quote 
+050  82474           (    040 0x28 00101000 Open parenthesis (or open bracket) 
+051  82466           )    041 0x29 00101001 Close parenthesis (or close bracket) 
+052  82              *    042 0x2A 00101010 Asterisk 
+053  333             +    043 0x2B 00101011 Plus 
+054  32170222        ,    044 0x2C 00101100 Comma 
+055  846897          -    045 0x2D 00101101 Hyphen 
+056  2169799         .    046 0x2E 00101110 Period, dot or full stop 
+057  10101712        /    047 0x2F 00101111 Slash or divide 
+060  14662722        0    048 0x30 00110000 Zero 
+061  8772505         1    049 0x31 00110001 One 
+062  9407796         2    050 0x32 00110010 Two 
+063  3468901         3    051 0x33 00110011 Three 
+064  1960302         4    052 0x34 00110100 Four 
+065  1895947         5    053 0x35 00110101 Five 
+066  2185270         6    054 0x36 00110110 Six 
+067  2015271         7    055 0x37 00110111 Seven 
+070  1925614         8    056 0x38 00111000 Eight 
+071  2740315         9    057 0x39 00111001 Nine 
+072  593304          :    058 0x3A 00111010 Colon 
+073  2763            ;    059 0x3B 00111011 Semicolon 
+074  1               <    060 0x3C 00111100 Less than (or open angled bracket) 
+075  5               =    061 0x3D 00111101 Equals 
+076  2               >    062 0x3E 00111110 Greater than (or close angled bracket) 
+077  149             ?    063 0x3F 00111111 Question mark 
+100  407             @    064 0x40 01000000 At symbol 
+101  3770573         A    065 0x41 01000001 Uppercase A 
+102  769497          B    066 0x42 01000010 Uppercase B 
+103  2226204         C    067 0x43 01000011 Uppercase C 
+104  2997046         D    068 0x44 01000100 Uppercase D 
+105  4975517         E    069 0x45 01000101 Uppercase E 
+106  834303          F    070 0x46 01000110 Uppercase F 
+107  1239337         G    071 0x47 01000111 Uppercase G 
+110  1445371         H    072 0x48 01001000 Uppercase H 
+111  3265698         I    073 0x49 01001001 Uppercase I 
+112  111297          J    074 0x4A 01001010 Uppercase J 
+113  1165008         K    075 0x4B 01001011 Uppercase K 
+114  4006356         L    076 0x4C 01001100 Uppercase L 
+115  1612218         M    077 0x4D 01001101 Uppercase M 
+116  3918514         N    078 0x4E 01001110 Uppercase N 
+117  3752395         O    079 0x4F 01001111 Uppercase O 
+120  1498292         P    080 0x50 01010000 Uppercase P 
+121  101046          Q    081 0x51 01010001 Uppercase Q 
+122  2911315         R    082 0x52 01010010 Uppercase R 
+123  2624260         S    083 0x53 01010011 Uppercase S 
+124  4026302         T    084 0x54 01010100 Uppercase T 
+125  2146986         U    085 0x55 01010101 Uppercase U 
+126  381891          V    086 0x56 01010110 Uppercase V 
+127  810982          W    087 0x57 01010111 Uppercase W 
+130  291854          X    088 0x58 01011000 Uppercase X 
+131  611459          Y    089 0x59 01011001 Uppercase Y 
+132  72479           Z    090 0x5A 01011010 Uppercase Z 
+133  84              [    091 0x5B 01011011 Opening bracket 
+134  35              \    092 0x5C 01011100 Backslash 
+135  82              ]    093 0x5D 01011101 Closing bracket 
+136                  ^    094 0x5E 01011110 Caret - circumflex 
+137  26              _    095 0x5F 01011111 Underscore 
+140  83              `    096 0x60 01100000 Backtick / Grave accent 
+141  5219864         a    097 0x61 01100001 Lowercase a 
+142  816414          b    098 0x62 01100010 Lowercase b 
+143  2506016         c    099 0x63 01100011 Lowercase c 
+144  3676384         d    100 0x64 01100100 Lowercase d 
+145  6003373         e    101 0x65 01100101 Lowercase e 
+146  523485          f    102 0x66 01100110 Lowercase f 
+147  1725033         g    103 0x67 01100111 Lowercase g 
+150  1204113         h    104 0x68 01101000 Lowercase h 
+151  7285745         i    105 0x69 01101001 Lowercase i 
+152  16963           j    106 0x6A 01101010 Lowercase j 
+153  650765          k    107 0x6B 01101011 Lowercase k 
+154  1061924         l    108 0x6C 01101100 Lowercase l 
+155  2859140         m    109 0x6D 01101101 Lowercase m 
+156  5052584         n    110 0x6E 01101110 Lowercase n 
+157  4138084         o    111 0x6F 01101111 Lowercase o 
+160  2353160         p    112 0x70 01110000 Lowercase p 
+161  23487           q    113 0x71 01110001 Lowercase q 
+162  2167293         r    114 0x72 01110010 Lowercase r 
+163  3605058         s    115 0x73 01110011 Lowercase s 
+164  6608610         t    116 0x74 01110100 Lowercase t 
+165  1785131         u    117 0x75 01110101 Lowercase u 
+166  2229728         v    118 0x76 01110110 Lowercase v 
+167  112850          w    119 0x77 01110111 Lowercase w 
+170  24943           x    120 0x78 01111000 Lowercase x 
+171  1398131         y    121 0x79 01111001 Lowercase y 
+172  10727           z    122 0x7A 01111010 Lowercase z 
+173  3               {    123 0x7B 01111011 Opening brace 
+174                  |    124 0x7C 01111100 Vertical bar 
+175  2               }    125 0x7D 01111101 Closing brace 
+176                  ~    126 0x7E 01111110 Equivalency sign - tilde 
+177                       127 0x7F 01111111 Delete 
+200  622             €    128 0x80 10000000 Euro sign 
+201  19                   129 0x81 10000001  
+202  15              ‚    130 0x82 10000010 Single low-9 quotation mark 
+203  1               ƒ    131 0x83 10000011 Latin small letter f with hook 
+204  25              „    132 0x84 10000100 Double low-9 quotation mark 
+205  13              …    133 0x85 10000101 Horizontal ellipsis 
+206  22              †    134 0x86 10000110 Dagger 
+207  5               ‡    135 0x87 10000111 Double dagger 
+210  28              ˆ    136 0x88 10001000 Modifier letter circumflex accent 
+211  163             ‰    137 0x89 10001001 Per mille sign 
+212  13              Š    138 0x8A 10001010 Latin capital letter S with caron 
+213  3               ‹    139 0x8B 10001011 Single left-pointing angle quotation 
+214  13              Œ    140 0x8C 10001100 Latin capital ligature OE 
+215  10                   141 0x8D 10001101  
+216  3               Ž    142 0x8E 10001110 Latin captial letter Z with caron 
+217  2                    143 0x8F 10001111  
+220  1                    144 0x90 10010000  
+221  4               ‘    145 0x91 10010001 Left single quotation mark 
+222  5               ’    146 0x92 10010010 Right single quotation mark 
+223  19              “    147 0x93 10010011 Left double quotation mark 
+224  12              ”    148 0x94 10010100 Right double quotation mark 
+225  5               •    149 0x95 10010101 Bullet 
+226  20              –    150 0x96 10010110 En dash 
+227  1               —    151 0x97 10010111 Em dash 
+230  21              ˜     152 0x98 10011000 Small tilde 
+231  570             ™    153 0x99 10011001 Trade mark sign 
+232  9               š    154 0x9A 10011010 Latin small letter S with caron 
+233                  ›    155 0x9B 10011011 Single right-pointing angle quotation mark 
+234  50              œ    156 0x9C 10011100 Latin small ligature oe 
+235  14                   157 0x9D 10011101  
+236  7               ž    158 0x9E 10011110 Latin small letter z with caron 
+237                  Ÿ    159 0x9F 10011111 Latin capital letter Y with diaeresis 
+240  2                    160 0xA0 10100000 Non-breaking space 
+241                  ¡    161 0xA1 10100001 Inverted exclamation mark 
+242  2               ¢    162 0xA2 10100010 Cent sign 
+243  48              £    163 0xA3 10100011 Pound sign 
+244                  ¤    164 0xA4 10100100 Currency sign 
+245  2               ¥    165 0xA5 10100101 Yen sign 
+246                  ¦    166 0xA6 10100110 Pipe, Broken vertical bar 
+247                  §    167 0xA7 10100111 Section sign 
+250                  ¨    168 0xA8 10101000 Spacing diaeresis - umlaut 
+251                  ©    169 0xA9 10101001 Copyright sign 
+252  2               ª    170 0xAA 10101010 Feminine ordinal indicator 
+253                  «    171 0xAB 10101011 Left double angle quotes 
+254  4               ¬    172 0xAC 10101100 Not sign 
+255                  ­    173 0xAD 10101101 Soft hyphen 
+256                  ®    174 0xAE 10101110 Registered trade mark sign 
+257                  ¯    175 0xAF 10101111 Spacing macron - overline 
+260  4               °    176 0xB0 10110000 Degree sign 
+261                  ±    177 0xB1 10110001 Plus-or-minus sign 
+262                  ²    178 0xB2 10110010 Superscript two - squared 
+263                  ³    179 0xB3 10110011 Superscript three - cubed 
+264                  ´    180 0xB4 10110100 Acute accent - spacing acute 
+265                  µ    181 0xB5 10110101 Micro sign 
+266  19              ¶    182 0xB6 10110110 Pilcrow sign - paragraph sign 
+267                  ·    183 0xB7 10110111 Middle dot - Georgian comma 
+270                  ¸    184 0xB8 10111000 Spacing cedilla 
+271                  ¹    185 0xB9 10111001 Superscript one 
+272                  º    186 0xBA 10111010 Masculine ordinal indicator 
+273  2               »    187 0xBB 10111011 Right double angle quotes 
+274                  ¼    188 0xBC 10111100 Fraction one quarter 
+275  1               ½    189 0xBD 10111101 Fraction one half 
+276                  ¾    190 0xBE 10111110 Fraction three quarters 
+277                  ¿    191 0xBF 10111111 Inverted question mark 
+300                  À    192 0xC0 11000000 Latin capital letter A with grave 
+301                  Á    193 0xC1 11000001 Latin capital letter A with acute 
+302  53              Â    194 0xC2 11000010 Latin capital letter A with circumflex 
+303  447             Ã    195 0xC3 11000011 Latin capital letter A with tilde 
+304  20              Ä    196 0xC4 11000100 Latin capital letter A with diaeresis 
+305  41              Å    197 0xC5 11000101 Latin capital letter A with ring above 
+306                  Æ    198 0xC6 11000110 Latin capital letter AE 
+307                  Ç    199 0xC7 11000111 Latin capital letter C with cedilla 
+310                  È    200 0xC8 11001000 Latin capital letter E with grave 
+311                  É    201 0xC9 11001001 Latin capital letter E with acute 
+312                  Ê    202 0xCA 11001010 Latin capital letter E with circumflex 
+313                  Ë    203 0xCB 11001011 Latin capital letter E with diaeresis 
+314                  Ì    204 0xCC 11001100 Latin capital letter I with grave 
+315                  Í    205 0xCD 11001101 Latin capital letter I with acute 
+316                  Î    206 0xCE 11001110 Latin capital letter I with circumflex 
+317                  Ï    207 0xCF 11001111 Latin capital letter I with diaeresis 
+320                  Ð    208 0xD0 11010000 Latin capital letter ETH 
+321                  Ñ    209 0xD1 11010001 Latin capital letter N with tilde 
+322                  Ò    210 0xD2 11010010 Latin capital letter O with grave 
+323                  Ó    211 0xD3 11010011 Latin capital letter O with acute 
+324                  Ô    212 0xD4 11010100 Latin capital letter O with circumflex 
+325                  Õ    213 0xD5 11010101 Latin capital letter O with tilde 
+326                  Ö    214 0xD6 11010110 Latin capital letter O with diaeresis 
+327                  ×    215 0xD7 11010111 Multiplication sign 
+330                  Ø    216 0xD8 11011000 Latin capital letter O with slash 
+331                  Ù    217 0xD9 11011001 Latin capital letter U with grave 
+332                  Ú    218 0xDA 11011010 Latin capital letter U with acute 
+333                  Û    219 0xDB 11011011 Latin capital letter U with circumflex 
+334                  Ü    220 0xDC 11011100 Latin capital letter U with diaeresis 
+335                  Ý    221 0xDD 11011101 Latin capital letter Y with acute 
+336                  Þ    222 0xDE 11011110 Latin capital letter THORN 
+337                  ß    223 0xDF 11011111 Latin small letter sharp s - ess-zed 
+340                  à    224 0xE0 11100000 Latin small letter a with grave 
+341                  á    225 0xE1 11100001 Latin small letter a with acute 
+342  610             â    226 0xE2 11100010 Latin small letter a with circumflex 
+343                  ã    227 0xE3 11100011 Latin small letter a with tilde 
+344                  ä    228 0xE4 11100100 Latin small letter a with diaeresis 
+345                  å    229 0xE5 11100101 Latin small letter a with ring above 
+346                  æ    230 0xE6 11100110 Latin small letter ae 
+347                  ç    231 0xE7 11100111 Latin small letter c with cedilla 
+350                  è    232 0xE8 11101000 Latin small letter e with grave 
+351                  é    233 0xE9 11101001 Latin small letter e with acute 
+352                  ê    234 0xEA 11101010 Latin small letter e with circumflex 
+353                  ë    235 0xEB 11101011 Latin small letter e with diaeresis 
+354                  ì    236 0xEC 11101100 Latin small letter i with grave 
+355                  í    237 0xED 11101101 Latin small letter i with acute 
+356                  î    238 0xEE 11101110 Latin small letter i with circumflex 
+357                  ï    239 0xEF 11101111 Latin small letter i with diaeresis 
+360                  ð    240 0xF0 11110000 Latin small letter eth 
+361                  ñ    241 0xF1 11110001 Latin small letter n with tilde 
+362                  ò    242 0xF2 11110010 Latin small letter o with grave 
+363                  ó    243 0xF3 11110011 Latin small letter o with acute 
+364                  ô    244 0xF4 11110100 Latin small letter o with circumflex 
+365                  õ    245 0xF5 11110101 Latin small letter o with tilde 
+366                  ö    246 0xF6 11110110 Latin small letter o with diaeresis 
+367                  ÷    247 0xF7 11110111 Division sign 
+370                  ø    248 0xF8 11111000 Latin small letter o with slash 
+371                  ù    249 0xF9 11111001 Latin small letter u with grave 
+372                  ú    250 0xFA 11111010 Latin small letter u with acute 
+373                  û    251 0xFB 11111011 Latin small letter u with circumflex 
+374                  ü    252 0xFC 11111100 Latin small letter u with diaeresis 
+375                  ý    253 0xFD 11111101 Latin small letter y with acute 
+376                  þ    254 0xFE 11111110 Latin small letter thorn 
+377                  ÿ    255 0xFF 11111111 Latin small letter y with diaeresis 
