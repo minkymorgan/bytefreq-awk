@@ -19,7 +19,7 @@
 #----------------------------------------------------------------#
 #
 # ByteFreq_1.0.5 Mask Based Data Profiling
-# License: GPLv3
+# License: MIT No Attribution
 # Author: Andrew Morgan
 #
 # Instructions for use
